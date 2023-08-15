@@ -8,6 +8,9 @@ TagManager:
   - Ground
   - MovingPlatform
   - Spike
+  - Trap
+  - ConveyorBelt
+  - Spring
   layers:
   - Default
   - TransparentFX
