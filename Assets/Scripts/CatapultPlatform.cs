@@ -12,7 +12,7 @@ public class CatapultPlatform : MonoBehaviour
     private HingeJoint2D hinge;
     private JointMotor2D motor;
 
-    private float resetTrapTimer = .1f;
+    public float resetTrapTimer = .01f;
     private float timer;
     private bool timerStart;
 
@@ -38,15 +38,30 @@ public class CatapultPlatform : MonoBehaviour
                 hinge.motor = motor;
                 hinge.useLimits = false;
                 hinge.useMotor = true;
+
+                StartCoroutine(ResetTrap());
             }
         }
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Player")
+        if(collision.gameObject.tag == "Player")
         {
             timerStart = true;
         }
+
+    }
+
+    IEnumerator ResetTrap()
+    {
+        timerStart = false;
+        yield return new WaitForSeconds(resetTrapTimer);
+        motor.motorSpeed = 100f;
+        motor.maxMotorTorque = 20f;
+        hinge.useLimits = true;
+        hinge.motor = motor;
+        timer = trapTimer;
+
     }
 
 
