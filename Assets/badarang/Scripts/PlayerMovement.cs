@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -19,6 +20,8 @@ public class PlayerMovement : MonoBehaviour
     private bool isFacingRight = true;
     public bool isCoyoteTime;
     private float dirtCreateDelay = 0f;
+    private bool isConveyor;
+    private bool isMoveToStartPosition = false;
 
     public bool isWallSliding;
     private float wallSlidingSpeed = 2f;
@@ -35,9 +38,23 @@ public class PlayerMovement : MonoBehaviour
     
     [SerializeField] private GameObject testParticleSystem = default;
     [SerializeField] private GameObject dirtParticle = default;
+
+    [SerializeField] private GameManager gameManager = default;
+
+    public AudioClip jumpSound;
+    public AudioSource audioSource;
+    public SpriteRenderer spr, eye1, eye2;
+    private float startX, startY;
+    private float curTime;
+    private Color newColor;
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        startX = rb.transform.position.x;
+        startY = rb.transform.position.y;
+        newColor = spr.color;
+
+        gameManager = DontDestroyObject.instance.GetComponentInChildren<GameManager>();
     }
 
     void Update()
@@ -52,21 +69,22 @@ public class PlayerMovement : MonoBehaviour
         
         if (isGrounded && moveInput != 0 && dirtCreateDelay <= 0 && Mathf.Abs(rb.velocity.x) > 1.1f)
         {
-            dirtCreateDelay = 1.5f;
+            dirtCreateDelay = 1.0f;
             GameObject particle = Instantiate(dirtParticle, rb.transform.position + new Vector3(isFacingRight ? -.5f : .5f, -.5f, 0), transform.rotation);
             ParticleSystem particlesys = particle.GetComponent<ParticleSystem>();
             particlesys.Play();
         }
         
-        if ((isGrounded || isCoyoteTime) && Input.GetKeyDown(KeyCode.UpArrow))
+        if ((isGrounded || isCoyoteTime) && (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.Space)))
         {
+            audioSource.PlayOneShot(jumpSound);
             isJumping = true;
             jumpTimeCounter = jumpTime;
             rb.velocity = Vector2.up * jumpSpeed;
             squashStretchAnimator.SetTrigger("Jump");
         }
 
-        if (Input.GetKey(KeyCode.UpArrow) && isJumping == true)
+        if ((Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.Space)) && isJumping == true)
         {
             if (jumpTimeCounter > 0)
             {
@@ -75,7 +93,7 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyUp(KeyCode.UpArrow))
+        if (Input.GetKeyUp(KeyCode.UpArrow) || Input.GetKeyUp(KeyCode.Space))
         {
             isJumping = false;
         }
@@ -83,6 +101,12 @@ public class PlayerMovement : MonoBehaviour
         WallSlide();
         WallJump();
         if (!isWallJumping) Flip();
+        if (isMoveToStartPosition)
+        {
+            curTime += Time.deltaTime;
+            gameObject.transform.position =
+                Vector3.Lerp(gameObject.transform.position, new Vector3(startX, startY, 0), curTime / 100);
+        }
     }
 
 
@@ -90,7 +114,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (!isWallJumping)
         {
-            rb.velocity = new Vector2(moveInput * maxSpeed, rb.velocity.y);
+            rb.velocity = new Vector2(moveInput * maxSpeed + (isConveyor ? 2 : 0), rb.velocity.y);
         }
     }
 
@@ -121,9 +145,10 @@ public class PlayerMovement : MonoBehaviour
 
     private void WallJump()
     {
-        if (Input.GetKeyDown(KeyCode.UpArrow) && isWallSliding)
+        if ((Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.Space)) && isWallSliding)
         {
             isWallJumping = true;
+            audioSource.PlayOneShot(jumpSound);
             squashStretchAnimator.SetTrigger("Jump");
             Invoke(nameof(StopWallJumping), wallJumpingDuration);
         }
@@ -154,12 +179,23 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.collider.tag == "Ground" && rb.velocity.y <= 0)
+        if (collision.collider.tag == "Ground")
         {
             squashStretchAnimator.SetTrigger("Landing");
         }
     }
 
+    private void OnCollisionStay2D(Collision2D other)
+    {
+        if (other.collider.tag == "ConveyorBelt")
+        {
+            isConveyor = true;
+        }
+        else
+        {
+            isConveyor = false;
+        }
+    }
 
     #region CoyoteTime
     private void OnCollisionExit2D(Collision2D collision)
@@ -184,17 +220,54 @@ public class PlayerMovement : MonoBehaviour
 
     void HandlingDie()
     {
-        GameObject particle = Instantiate(testParticleSystem);
+        GameObject particle = Instantiate(testParticleSystem, rb.transform.position + new Vector3(0f, 0f, 0f), transform.rotation);
+
         ParticleSystem particlesys = particle.GetComponent<ParticleSystem>();
         particlesys.Play();
-        Destroy(this.gameObject);
-    }
 
+        //gameObject.SetActive(false);
+        newColor.a = 0f;
+        spr.color = newColor;
+        eye1.color = new Color(1f, 1f, 1f, 0f);
+        eye2.color = new Color(1f, 1f, 1f, 0f);
+        StartCoroutine("MoveToStartPosition");
+        //Destroy(this.gameObject);
+    }
+    IEnumerator MoveToStartPosition()
+    {
+        rb.bodyType = RigidbodyType2D.Static;
+        yield return new WaitForSeconds(1.0f);
+        curTime = 0;
+        isMoveToStartPosition = true;
+        yield return new WaitForSeconds( 3.0f);
+        isMoveToStartPosition = false;
+
+        /*
+         * Handling Editing Mode
+         */
+
+        Debug.Log(gameManager.curStage);
+        gameManager.EditMode();
+
+        //yield return new 
+        
+        rb.bodyType = RigidbodyType2D.Dynamic;
+        newColor.a = 1f;
+        spr.color = newColor;
+        eye1.color = new Color(1f, 1f, 1f, 1f);
+        eye2.color = new Color(1f, 1f, 1f, 1f);
+    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Spike"))
         {
             HandlingDie();
+        }
+
+        if (collision.CompareTag("Spring"))
+        {
+            rb.velocity = Vector2.up * jumpSpeed * 2;
+            audioSource.PlayOneShot(jumpSound);
         }
     }
 

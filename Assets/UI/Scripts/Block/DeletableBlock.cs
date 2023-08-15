@@ -24,7 +24,7 @@ public class DeletableBlock : BlockBase, IDeletable
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public void SetDeletable(bool deletable)
@@ -47,7 +47,7 @@ public class DeletableBlock : BlockBase, IDeletable
         onExitHoverCallback = callback;
     }
 
-    public void OnMouseDown()
+    public void onClicked()
     {
         if (!EventSystem.current.IsPointerOverGameObject() && deletable)
         {
@@ -55,14 +55,32 @@ public class DeletableBlock : BlockBase, IDeletable
         }
     }
 
-    public void OnMouseOver()
+    public void onHovered()
     {
         if (deletable)
             onHoverCallback(this.gameObject);
     }
 
-    public void OnMouseExit()
+    public void onExited()
     {
         onExitHoverCallback(this.gameObject);
+    }
+
+    public void OnMouseDown()
+    {
+        Debug.Log("click");
+        onClicked();
+    }
+
+    public void OnMouseOver()
+    {
+        Debug.Log("hover");
+        onHovered();
+    }
+
+    public void OnMouseExit()
+    {
+        Debug.Log("exit");
+        onExited();
     }
 }
