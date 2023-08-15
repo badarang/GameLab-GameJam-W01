@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InstalableBlock : MonoBehaviour
+public class InstalableBlock : BlockBase, IInstallable
 {
     // Start is called before the first frame update
     void Start()

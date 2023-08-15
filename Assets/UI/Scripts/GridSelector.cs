@@ -8,6 +8,9 @@ using UnityEngine.EventSystems;
 public class GridSelector : MonoBehaviour
 {
     [SerializeField]
+    public List<GameObject> btnImgPrefabs;
+
+    [SerializeField]
     public List<GameObject> objPrefabs;
 
     [SerializeField]
@@ -17,6 +20,7 @@ public class GridSelector : MonoBehaviour
     public GameObject unableGridPrefab;
 
     public GameObject selectButtonPrefab;
+    public GameObject deleteButtonImagePrefab;
 
     public Tilemap selectionTilemap;
     public RectTransform selectionButtonPanel;
@@ -26,14 +30,16 @@ public class GridSelector : MonoBehaviour
     private BlockType selectedBlock;
     private Vector2Int selectedBlockSize;
 
-    private List<GameObject> instantiatedGrids;
+    private List<GameObject> instantiatedSelectGrids;
+    private List<GameObject> instantiatedUnableGrids;
     private List<GameObject> instantiatedBlockObjs;
 
     [SerializeField]
     public readonly Dictionary<BlockType, Vector2Int> blockSizeData = new Dictionary<BlockType, Vector2Int>()
     {
-        { BlockType.BlockA, new Vector2Int(2, 1) },
-        { BlockType.BlockB, new Vector2Int(2, 3) },
+        { BlockType.OIL_PRESS, new Vector2Int(1, 1) },
+        { BlockType.SPINE_SMALL, new Vector2Int(1, 1) },
+        { BlockType.SPINE_BIG, new Vector2Int(3, 1) },
         { BlockType.NONE, new Vector2Int(0, 0) },
         { BlockType.DELETE, new Vector2Int(0, 0) },
     };
@@ -45,7 +51,7 @@ public class GridSelector : MonoBehaviour
     {
         // Initialize selection info
         // Also instantiate buttons for selection UI
-        if (objPrefabs.Count != blockTypes.Count)
+        if (objPrefabs.Count != blockTypes.Count || objPrefabs.Count != btnImgPrefabs.Count)
         {
             Debug.LogError("Number of block object prefabs(" + objPrefabs.Count + ") is not match with block types(" + blockTypes.Count + ")");
         }
@@ -54,13 +60,14 @@ public class GridSelector : MonoBehaviour
         {
             blockObjectData.Add(blockTypes[i], objPrefabs[i]);
 
-            AddButton(blockTypes[i]);
+            AddButton(blockTypes[i], btnImgPrefabs[i]);
         }
 
-        AddButton(BlockType.DELETE);
+        AddButton(BlockType.DELETE, deleteButtonImagePrefab);
 
         // Initialize private values
-        instantiatedGrids = new List<GameObject>();
+        instantiatedSelectGrids = new List<GameObject>();
+        instantiatedUnableGrids = new List<GameObject>();
         instantiatedBlockObjs = new List<GameObject>();
 
         selectedBlock = BlockType.NONE;
@@ -74,12 +81,12 @@ public class GridSelector : MonoBehaviour
             hoverPos = selectionTilemap.WorldToCell(Camera.main.ScreenToWorldPoint(Input.mousePosition));
             if (hoverPos != prevHoverPos)
             {
-                foreach (GameObject g in instantiatedGrids)
+                foreach (GameObject g in instantiatedSelectGrids)
                 {
                     Destroy(g);
                 }
 
-                instantiatedGrids = new List<GameObject>();
+                instantiatedSelectGrids = new List<GameObject>();
 
                 Vector3 targetPos = selectionTilemap.GetCellCenterWorld(hoverPos);
                 Vector3 startPos = GetStartGridPos(targetPos);
@@ -90,7 +97,7 @@ public class GridSelector : MonoBehaviour
                     {
                         GameObject g = Instantiate(selectGridPrefab);
 
-                        instantiatedGrids.Add(g);
+                        instantiatedSelectGrids.Add(g);
                         g.GetComponent<Transform>().position =
                             new Vector3(
                                 startPos.x + selectionTilemap.cellSize.x * i,
@@ -111,19 +118,19 @@ public class GridSelector : MonoBehaviour
 
                 Debug.Log("" + targetPos + " " + startPos + " " + endPos);
 
-                PlaceBlockObj(selectedBlock, (startPos + endPos) / 2);
+                PlaceBlockObj(selectedBlock, (startPos + endPos) / 2, startPos);
             }
         }
         else
         {
-            if (instantiatedGrids.Count != 0)
+            if (instantiatedSelectGrids.Count != 0)
             {
-                foreach (GameObject g in instantiatedGrids)
+                foreach (GameObject g in instantiatedSelectGrids)
                 {
                     Destroy(g);
                 }
 
-                instantiatedGrids = new List<GameObject>();
+                instantiatedSelectGrids = new List<GameObject>();
             }
         }
     }
@@ -143,16 +150,19 @@ public class GridSelector : MonoBehaviour
         }
     }
 
-    private void AddButton(BlockType type)
+    private void AddButton(BlockType type, GameObject blockImgObj)
     {
         GameObject b = Instantiate(selectButtonPrefab);
-        b.GetComponent<RectTransform>().parent = selectionButtonPanel;
+        b.GetComponent<RectTransform>().SetParent(selectionButtonPanel);
         b.GetComponent<Button>().onClick.AddListener(() => {
             SetBlock(type);
         });
+
+        GameObject bimg = Instantiate(blockImgObj);
+        bimg.GetComponent<RectTransform>().SetParent(b.GetComponent<RectTransform>());
     }
 
-    private void PlaceBlockObj(BlockType type, Vector3 position)
+    private void PlaceBlockObj(BlockType type, Vector3 position, Vector3 startPos)
     {
         GameObject g = Instantiate(blockObjectData[type]);
         g.GetComponent<Transform>().position = position;
@@ -163,6 +173,61 @@ public class GridSelector : MonoBehaviour
             deletable.SetOnDeleteCallback((target) => {
                 instantiatedBlockObjs.Remove(target);
                 Destroy(target);
+
+                if (instantiatedUnableGrids.Count > 0)
+                {
+                    Debug.Log("delete");
+                    foreach (GameObject g in instantiatedUnableGrids)
+                    {
+                        Destroy(g);
+                    }
+
+                    instantiatedUnableGrids = new List<GameObject>();
+                }
+            });
+
+            deletable.SetOnHoverCallback((target) => {
+                if (instantiatedBlockObjs.Contains(target))
+                {
+                    if (instantiatedUnableGrids.Count > 0)
+                    {
+                        foreach (GameObject g in instantiatedUnableGrids)
+                        {
+                            Destroy(g);
+                        }
+
+                        instantiatedUnableGrids = new List<GameObject>();
+                    }
+
+                    for (int i = 0; i < blockSizeData[type].x; i++)
+                    {
+                        for (int j = 0; j < blockSizeData[type].y; j++)
+                        {
+                            GameObject g = Instantiate(unableGridPrefab);
+
+                            instantiatedUnableGrids.Add(g);
+                            g.GetComponent<Transform>().position =
+                                new Vector3(
+                                    startPos.x + selectionTilemap.cellSize.x * i,
+                                    startPos.y + selectionTilemap.cellSize.y * j,
+                                    startPos.z
+                                );
+                        }
+                    }
+                }
+            });
+
+            deletable.SetOnExitHoverCallback((target) =>
+            {
+                if (instantiatedUnableGrids.Count > 0)
+                {
+                    foreach (GameObject g in instantiatedUnableGrids)
+                    {
+                        Destroy(g);
+                    }
+
+                    instantiatedUnableGrids = new List<GameObject>();
+                }
             });
         }
 
@@ -194,8 +259,9 @@ public enum BlockType
 {
     NONE,
     DELETE,
-    BlockA,
-    BlockB
+    OIL_PRESS,
+    SPINE_SMALL,
+    SPINE_BIG
 }
 
 public struct BlockInfo

@@ -4,12 +4,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class DeletableBlock : MonoBehaviour, IDeletable
+public class DeletableBlock : BlockBase, IDeletable
 {
     private SpriteRenderer sr;
 
     private bool deletable;
     private Action<GameObject> onDeleteCallback;
+    private Action<GameObject> onHoverCallback;
+    private Action<GameObject> onExitHoverCallback;
 
     // Start is called before the first frame update
     void Start()
@@ -35,9 +37,19 @@ public class DeletableBlock : MonoBehaviour, IDeletable
         onDeleteCallback = callback;
     }
 
+    public void SetOnHoverCallback(Action<GameObject> callback)
+    {
+        onHoverCallback = callback;
+    }
+
+    public void SetOnExitHoverCallback(Action<GameObject> callback)
+    {
+        onExitHoverCallback = callback;
+    }
+
     public void OnMouseDown()
     {
-        if (!EventSystem.current.IsPointerOverGameObject())
+        if (!EventSystem.current.IsPointerOverGameObject() && deletable)
         {
             onDeleteCallback(this.gameObject);
         }
@@ -46,11 +58,11 @@ public class DeletableBlock : MonoBehaviour, IDeletable
     public void OnMouseOver()
     {
         if (deletable)
-            sr.color = new Color(1, 0.3f, 0.3f, 0.75f);
+            onHoverCallback(this.gameObject);
     }
 
     public void OnMouseExit()
     {
-        sr.color = new Color(0, 0, 0, 0.75f);
+        onExitHoverCallback(this.gameObject);
     }
 }

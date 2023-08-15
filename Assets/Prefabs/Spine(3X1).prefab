@@ -94,6 +94,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5626630697845023872}
   - component: {fileID: 3558382838480151395}
+  - component: {fileID: 8585241612082858787}
   m_Layer: 0
   m_Name: Spine(3X1)
   m_TagString: Trap
@@ -156,6 +157,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 3, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &8585241612082858787
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 759293611566594152}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6e71515ae4a94f46a5d26899678a6b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &845102258440820281
 GameObject:
   m_ObjectHideFlags: 0

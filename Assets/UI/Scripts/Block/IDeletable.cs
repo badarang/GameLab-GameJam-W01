@@ -7,4 +7,6 @@ public interface IDeletable
 {
     void SetDeletable(bool deletable);
     void SetOnDeleteCallback(Action<GameObject> callback);
+    void SetOnHoverCallback(Action<GameObject> callback);
+    void SetOnExitHoverCallback(Action<GameObject> callback);
 }
