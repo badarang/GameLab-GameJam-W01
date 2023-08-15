@@ -4,15 +4,18 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Trap
+  - Obstacles
+  - Ground
+  - MovingPlatform
+  - Spike
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - groundLayer
   - Water
   - UI
-  - 
+  - wallLayer
   - 
   - 
   - 
