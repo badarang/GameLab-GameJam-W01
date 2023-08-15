@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: -6474901165522105226}
   m_Layer: 0
   m_Name: Spine(1X1)
-  m_TagString: Trap
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
