@@ -425,7 +425,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playCamera: {fileID: 0}
   editCamera: {fileID: 0}
-  gridSelector: {fileID: 0}
+  gridSelector: {fileID: 6464922417447195432}
+  selectionUI: {fileID: 8916310309242967552}
   editMode: 0
 --- !u!1 &6644317143846823728
 GameObject:
@@ -552,7 +553,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5368365788856517915, guid: 5f574b3f610828648951383158de2d5f, type: 3}
       propertyPath: m_SortingLayer
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5368365788856517915, guid: 5f574b3f610828648951383158de2d5f, type: 3}
       propertyPath: m_SortingLayerID

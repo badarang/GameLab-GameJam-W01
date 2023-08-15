@@ -50,49 +50,12 @@ public class GridSelector : MonoBehaviour
     private MapLoader mapLoader;
     private MapData curMapData;
 
+    private bool hasInitialized = false;
+
     // Start is called before the first frame update
     void Start()
     {
-        blockObjectData = new Dictionary<BlockType, GameObject>();
-        blockBtnImgData = new Dictionary<BlockType, GameObject>();
-
-        // Initialize all blocks info
-        if (allObjPrefabs.Count != blockTypes.Count || allObjPrefabs.Count != btnImgPrefabs.Count)
-        {
-            Debug.LogError("Number of block object prefabs(" + allObjPrefabs.Count + ") is not match with block types(" + blockTypes.Count + ")");
-        }
-
-        for (int i = 0; i < allObjPrefabs.Count; i++)
-        {
-            blockObjectData.Add(blockTypes[i], allObjPrefabs[i]);
-            blockBtnImgData.Add(blockTypes[i], btnImgPrefabs[i]);
-        }
-
-        mapLoader = GetComponent<MapLoader>();
-        curMapData = mapLoader.LoadMap(0);
-
-        foreach (BlockInfo b in curMapData.installableBlocks)
-        {
-            AddButton(b);
-        }
-
-        BlockInfo deleteButtonInfo = new BlockInfo();
-        deleteButtonInfo.type = BlockType.DELETE;
-        AddButton(deleteButtonInfo);
-
-        // Initialize private values
-        instantiatedSelectGrids = new List<GameObject>();
-        instantiatedUnableGrids = new List<GameObject>();
-        instantiatedBlockObjs = new List<GameObject>();
-
-        foreach (BlockInfo b in curMapData.defaultBlocks)
-        {
-            PlaceBlockObj(b);
-        }
-
-        BlockInfo nonBlockInfo = new BlockInfo();
-        nonBlockInfo.type = BlockType.NONE;
-        selectedBlockInfo = nonBlockInfo;
+        hasInitialized = false;
     }
 
     // Update is called once per frame
@@ -158,6 +121,52 @@ public class GridSelector : MonoBehaviour
                 instantiatedSelectGrids = new List<GameObject>();
             }
         }
+    }
+    
+    public void InitSelectionUI(int level)
+    {
+        blockObjectData = new Dictionary<BlockType, GameObject>();
+        blockBtnImgData = new Dictionary<BlockType, GameObject>();
+
+        // Initialize all blocks info
+        if (allObjPrefabs.Count != blockTypes.Count || allObjPrefabs.Count != btnImgPrefabs.Count)
+        {
+            Debug.LogError("Number of block object prefabs(" + allObjPrefabs.Count + ") is not match with block types(" + blockTypes.Count + ")");
+        }
+
+        for (int i = 0; i < allObjPrefabs.Count; i++)
+        {
+            blockObjectData.Add(blockTypes[i], allObjPrefabs[i]);
+            blockBtnImgData.Add(blockTypes[i], btnImgPrefabs[i]);
+        }
+
+        mapLoader = GetComponent<MapLoader>();
+        curMapData = mapLoader.LoadMap(0);
+
+        foreach (BlockInfo b in curMapData.installableBlocks)
+        {
+            AddButton(b);
+        }
+
+        BlockInfo deleteButtonInfo = new BlockInfo();
+        deleteButtonInfo.type = BlockType.DELETE;
+        AddButton(deleteButtonInfo);
+
+        // Initialize private values
+        instantiatedSelectGrids = new List<GameObject>();
+        instantiatedUnableGrids = new List<GameObject>();
+        instantiatedBlockObjs = new List<GameObject>();
+
+        foreach (BlockInfo b in curMapData.defaultBlocks)
+        {
+            PlaceBlockObj(b);
+        }
+
+        BlockInfo nonBlockInfo = new BlockInfo();
+        nonBlockInfo.type = BlockType.NONE;
+        selectedBlockInfo = nonBlockInfo;
+
+        hasInitialized = true;
     }
 
     public void SetBlock(BlockInfo blockInfo)

@@ -138,14 +138,6 @@ PrefabInstance:
       propertyPath: playCamera
       value: 
       objectReference: {fileID: 845210882}
-    - target: {fileID: 1749136561, guid: 2ae5aeacd0913a3479221d4b30c3f235, type: 3}
-      propertyPath: selectionUI
-      value: 
-      objectReference: {fileID: 1508289045}
-    - target: {fileID: 1749136561, guid: 2ae5aeacd0913a3479221d4b30c3f235, type: 3}
-      propertyPath: gridSelector
-      value: 
-      objectReference: {fileID: 1723685269}
     - target: {fileID: 615621609569855954, guid: 2ae5aeacd0913a3479221d4b30c3f235, type: 3}
       propertyPath: m_RootOrder
       value: 10
@@ -190,21 +182,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6464922417140076248, guid: 2ae5aeacd0913a3479221d4b30c3f235, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6464922417803391638, guid: 2ae5aeacd0913a3479221d4b30c3f235, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6644317143846823728, guid: 2ae5aeacd0913a3479221d4b30c3f235, type: 3}
       propertyPath: m_Name
       value: SelectionUI
-      objectReference: {fileID: 0}
-    - target: {fileID: 7028532985964018867, guid: 2ae5aeacd0913a3479221d4b30c3f235, type: 3}
-      propertyPath: m_RootOrder
-      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2ae5aeacd0913a3479221d4b30c3f235, type: 3}
@@ -1078,11 +1058,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!1 &1508289045 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8916310309242967552, guid: 2ae5aeacd0913a3479221d4b30c3f235, type: 3}
-  m_PrefabInstance: {fileID: 209553934}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1579600006 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5057517992666490328, guid: 8a5c29fa8e8174e44b9ca25ca76fa516, type: 3}
@@ -1174,17 +1149,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &1723685269 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6464922417447195432, guid: 2ae5aeacd0913a3479221d4b30c3f235, type: 3}
-  m_PrefabInstance: {fileID: 209553934}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bab22e91327e3894ea505180e3598b96, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &2139585830
 PrefabInstance:
   m_ObjectHideFlags: 0

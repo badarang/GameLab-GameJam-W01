@@ -10,12 +10,12 @@ public class PlayManager : MonoBehaviour
     public GridSelector gridSelector;
     public GameObject selectionUI;
 
-    public bool editMode = false;
+    public bool editMode = true;
 
     // Start is called before the first frame update
     void Start()
     {
-
+        editMode = true;
     }
 
     // Update is called once per frame
