@@ -1,34 +1,40 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    private float moveInput;
+    public float moveInput;
     public float maxSpeed;
     public float jumpSpeed;
-    private bool isGrounded;
+    public bool isGrounded;
     public Transform feetPos;
     public float checkRadius;
     public LayerMask groundLayer;
-    private bool isJumping;
-    private float jumpTimeCounter;
+    public bool isJumping;
+    public float jumpTimeCounter;
     public float jumpTime;
     private bool isFacingRight = true;
+    public bool isCoyoteTime;
+    private float dirtCreateDelay = 0f;
 
     public bool isWallSliding;
     private float wallSlidingSpeed = 2f;
 
     private bool isWallJumping;
     private float wallJumpingDirection;
-    private float wallJumpingTime = .2f;
     private float wallJumpingCounter;
-    private float wallJumpingDuration = .3f;
-    private Vector2 wallJumpingSpeed = new Vector2(8f, 16f);
+    private float wallJumpingDuration = .05f;
+    private Vector2 wallJumpingSpeed = new Vector2(16f, 16f);
     Rigidbody2D rb;
     public Transform wallCheck;
     public LayerMask wallLayer;
-
+    public Animator squashStretchAnimator;
+    
+    [SerializeField] private GameObject testParticleSystem = default;
+    [SerializeField] private GameObject dirtParticle = default;
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -37,13 +43,27 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         moveInput = Input.GetAxisRaw("Horizontal");
+        if (moveInput != 0) gameObject.transform.SetParent(null);
         isGrounded = Physics2D.OverlapCircle(feetPos.position, checkRadius, groundLayer);
+        if (dirtCreateDelay > 0f)
+        {
+            dirtCreateDelay -= .01f;
+        }
         
-        if (isGrounded && Input.GetKeyDown(KeyCode.UpArrow))
+        if (isGrounded && moveInput != 0 && dirtCreateDelay <= 0 && Mathf.Abs(rb.velocity.x) > 1.1f)
+        {
+            dirtCreateDelay = 1.5f;
+            GameObject particle = Instantiate(dirtParticle, rb.transform.position + new Vector3(isFacingRight ? -.5f : .5f, -.5f, 0), transform.rotation);
+            ParticleSystem particlesys = particle.GetComponent<ParticleSystem>();
+            particlesys.Play();
+        }
+        
+        if ((isGrounded || isCoyoteTime) && Input.GetKeyDown(KeyCode.UpArrow))
         {
             isJumping = true;
             jumpTimeCounter = jumpTime;
             rb.velocity = Vector2.up * jumpSpeed;
+            squashStretchAnimator.SetTrigger("Jump");
         }
 
         if (Input.GetKey(KeyCode.UpArrow) && isJumping == true)
@@ -74,6 +94,8 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    #region WallJump
+    
     private bool IsWalled()
     {
         return Physics2D.OverlapCircle(wallCheck.position, .2f, wallLayer);
@@ -84,45 +106,31 @@ public class PlayerMovement : MonoBehaviour
         if (IsWalled() && !isGrounded && moveInput != 0f)
         {
             isWallSliding = true;
-            Debug.Log(Mathf.Clamp(rb.velocity.y, -wallSlidingSpeed, float.MaxValue));
-            rb.velocity = new Vector2(rb.velocity.x, Mathf.Clamp(rb.velocity.y, -wallSlidingSpeed, float.MaxValue));
+            //Debug.Log(Mathf.Clamp(rb.velocity.y, -wallSlidingSpeed, float.MaxValue));
         }
         else
         {
             isWallSliding = false;
         }
+
+        if (isWallSliding)
+        {
+            rb.velocity = new Vector2(rb.velocity.x, Mathf.Clamp(rb.velocity.y, -wallSlidingSpeed, float.MaxValue));
+        }
     }
 
     private void WallJump()
     {
-        if (isWallSliding)
-        {
-            isWallJumping = false;
-            wallJumpingDirection = -transform.localScale.x;
-            wallJumpingCounter = wallJumpingTime;
-
-            CancelInvoke(nameof(StopWallJumping));
-        }
-        else
-        {
-            wallJumpingCounter -= Time.deltaTime;
-        }
-
-        if (Input.GetKeyDown(KeyCode.UpArrow) && wallJumpingCounter > 0f)
+        if (Input.GetKeyDown(KeyCode.UpArrow) && isWallSliding)
         {
             isWallJumping = true;
-            rb.velocity = new Vector2(wallJumpingDirection * wallJumpingSpeed.x, wallJumpingSpeed.y);
-            wallJumpingCounter = 0f;
-
-            if (transform.localScale.x != wallJumpingDirection)
-            {
-                isFacingRight = !isFacingRight;
-                Vector3 localScale = transform.localScale;
-                localScale.x *= -1f;
-                transform.localScale = localScale;
-            }
-
+            squashStretchAnimator.SetTrigger("Jump");
             Invoke(nameof(StopWallJumping), wallJumpingDuration);
+        }
+
+        if (isWallJumping)
+        {
+            rb.velocity = new Vector2(-moveInput * wallJumpingSpeed.x, wallJumpingSpeed.y);
         }
     }
 
@@ -130,6 +138,8 @@ public class PlayerMovement : MonoBehaviour
     {
         isWallJumping = false;
     }
+   
+    #endregion
     
     private void Flip()
     {
@@ -141,4 +151,53 @@ public class PlayerMovement : MonoBehaviour
             transform.localScale = localScale;
         }
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.collider.tag == "Ground" && rb.velocity.y <= 0)
+        {
+            squashStretchAnimator.SetTrigger("Landing");
+        }
+    }
+
+
+    #region CoyoteTime
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.collider.tag == "Ground" && rb.velocity.y <= 0)
+        {
+            isCoyoteTime = true;
+            StartCoroutine(Co_CoyoteTimer());
+        }
+    }
+
+    IEnumerator Co_CoyoteTimer()
+    {
+        yield return new WaitForSecondsRealtime(.2f);
+        isCoyoteTime = false;
+    }
+    
+    #endregion
+    
+    
+    #region Die
+
+    void HandlingDie()
+    {
+        GameObject particle = Instantiate(testParticleSystem);
+        ParticleSystem particlesys = particle.GetComponent<ParticleSystem>();
+        particlesys.Play();
+        Destroy(this.gameObject);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Spike"))
+        {
+            HandlingDie();
+        }
+    }
+
+    #endregion
+    
 }

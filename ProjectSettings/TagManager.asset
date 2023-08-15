@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Obstacles
   - Ground
+  - MovingPlatform
+  - Spike
   layers:
   - Default
   - TransparentFX
