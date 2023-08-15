@@ -9,6 +9,8 @@ TagManager:
   - MovingPlatform
   - Spike
   - Trap
+  - ConveyorBelt
+  - Spring
   layers:
   - Default
   - TransparentFX
@@ -45,9 +47,6 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
-    locked: 0
-  - name: Grid Block
-    uniqueID: 3594115783
     locked: 0
   - name: Grid Selector
     uniqueID: 539173553
