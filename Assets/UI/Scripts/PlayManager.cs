@@ -7,6 +7,9 @@ public class PlayManager : MonoBehaviour
     public CameraFollow playCamera;
     public UICameraControl editCamera;
 
+    public GridSelector gridSelector;
+    public GameObject selectionUI;
+
     public bool editMode = false;
 
     // Start is called before the first frame update
@@ -22,10 +25,22 @@ public class PlayManager : MonoBehaviour
         {
             playCamera.enabled = true;
             editCamera.enabled = false;
+            SetPlayMode();
         } else
         {
             playCamera.enabled = false;
             editCamera.enabled = true;
+            SetEditMode();
         }
+    }
+
+    public void SetEditMode()
+    {
+        selectionUI.SetActive(true);
+    }
+
+    public void SetPlayMode()
+    {
+        selectionUI.SetActive(false);
     }
 }

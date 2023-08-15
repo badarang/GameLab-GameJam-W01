@@ -47,25 +47,40 @@ public class DeletableBlock : BlockBase, IDeletable
         onExitHoverCallback = callback;
     }
 
-    public void OnMouseDown()
+    public void onClicked()
     {
-        Debug.Log("click");
         if (!EventSystem.current.IsPointerOverGameObject() && deletable)
         {
             onDeleteCallback(this.gameObject);
         }
     }
 
+    public void onHovered()
+    {
+        if (deletable)
+            onHoverCallback(this.gameObject);
+    }
+
+    public void onExited()
+    {
+        onExitHoverCallback(this.gameObject);
+    }
+
+    public void OnMouseDown()
+    {
+        Debug.Log("click");
+        onClicked();
+    }
+
     public void OnMouseOver()
     {
         Debug.Log("hover");
-        if (deletable)
-            onHoverCallback(this.gameObject);
+        onHovered();
     }
 
     public void OnMouseExit()
     {
         Debug.Log("exit");
-        onExitHoverCallback(this.gameObject);
+        onExited();
     }
 }
