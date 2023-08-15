@@ -1079,6 +1079,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b994e1a42adebe4c9d636c6648ab03c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selectionUI: {fileID: 6644317143846823728, guid: 2ae5aeacd0913a3479221d4b30c3f235, type: 3}
+  playManager: {fileID: 0}
   curStage: 1
 --- !u!114 &1099148791
 MonoBehaviour:

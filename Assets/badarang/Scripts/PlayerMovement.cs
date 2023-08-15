@@ -39,6 +39,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private GameObject testParticleSystem = default;
     [SerializeField] private GameObject dirtParticle = default;
 
+    [SerializeField] private GameManager gameManager = default;
+
     public AudioClip jumpSound;
     public AudioSource audioSource;
     public SpriteRenderer spr, eye1, eye2;
@@ -51,6 +53,8 @@ public class PlayerMovement : MonoBehaviour
         startX = rb.transform.position.x;
         startY = rb.transform.position.y;
         newColor = spr.color;
+
+        gameManager = DontDestroyObject.instance.GetComponentInChildren<GameManager>();
     }
 
     void Update()
@@ -237,11 +241,15 @@ public class PlayerMovement : MonoBehaviour
         isMoveToStartPosition = true;
         yield return new WaitForSeconds( 3.0f);
         isMoveToStartPosition = false;
-        
+
         /*
          * Handling Editing Mode
          */
-        
+
+        Debug.Log(gameManager.curStage);
+        gameManager.EditMode();
+
+        //yield return new 
         
         rb.bodyType = RigidbodyType2D.Dynamic;
         newColor.a = 1f;

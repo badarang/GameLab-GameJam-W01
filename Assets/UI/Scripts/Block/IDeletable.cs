@@ -9,4 +9,10 @@ public interface IDeletable
     void SetOnDeleteCallback(Action<GameObject> callback);
     void SetOnHoverCallback(Action<GameObject> callback);
     void SetOnExitHoverCallback(Action<GameObject> callback);
+
+    public void onClicked();
+
+    public void onHovered();
+
+    public void onExited();
 }
