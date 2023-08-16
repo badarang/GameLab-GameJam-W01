@@ -9,21 +9,34 @@ public class DontDestroyObject : MonoBehaviour
     public static DontDestroyObject instance = null;
     // Start is called before the first frame update
 
+    public static DontDestroyObject Instance
+    {
+        get
+        {
+            if(instance == null)
+            {
+                SetupInstance();
+            }
+            return instance;
+        }
+    }
+
     private void Awake()
     {
-        if (instance == null) instance = this;
-        else if (instance != this) Destroy(gameObject);
-        DontDestroyOnLoad(gameObject);
-    }
-
-    void Start()
-    {
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
         
     }
 
-    // Update is called once per frame
-    void Update()
+    private static void SetupInstance()
     {
-        
+        instance = FindObjectOfType<DontDestroyObject>();
     }
 }
