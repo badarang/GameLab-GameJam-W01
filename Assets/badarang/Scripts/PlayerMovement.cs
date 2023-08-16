@@ -38,7 +38,7 @@ public class PlayerMovement : MonoBehaviour
     
     [SerializeField] private GameObject testParticleSystem = default;
     [SerializeField] private GameObject dirtParticle = default;
-    [SerializeField] private GameObject playManager = default;
+
     [SerializeField] private GameManager gameManager = default;
 
     public AudioClip jumpSound;
@@ -47,24 +47,19 @@ public class PlayerMovement : MonoBehaviour
     private float startX, startY;
     private float curTime;
     private Color newColor;
-    [SerializeField] private bool canMove = true;
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         startX = rb.transform.position.x;
         startY = rb.transform.position.y;
         newColor = spr.color;
-        playManager = GameObject.Find("PlayManager");
-        gameManager = DontDestroyObject.instance.GetComponentInChildren<GameManager>();
+
+        gameManager = DontDestroyObject.gameManager;
     }
 
     void Update()
     {
-        if (playManager != null)
-        {
-            canMove = !playManager.GetComponent<PlayManager>().editMode;
-        }
-        if (canMove) moveInput = Input.GetAxisRaw("Horizontal");
+        moveInput = Input.GetAxisRaw("Horizontal");
         if (moveInput != 0) gameObject.transform.SetParent(null);
         isGrounded = Physics2D.OverlapCircle(feetPos.position, checkRadius, groundLayer);
         if (dirtCreateDelay > 0f)
@@ -80,7 +75,7 @@ public class PlayerMovement : MonoBehaviour
             particlesys.Play();
         }
         
-        if (canMove && (isGrounded || isCoyoteTime) && (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.Space)))
+        if ((isGrounded || isCoyoteTime) && (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.Space)))
         {
             audioSource.PlayOneShot(jumpSound);
             isJumping = true;
@@ -89,7 +84,7 @@ public class PlayerMovement : MonoBehaviour
             squashStretchAnimator.SetTrigger("Jump");
         }
 
-        if (canMove && (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.Space)) && isJumping == true)
+        if ((Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.Space)) && isJumping == true)
         {
             if (jumpTimeCounter > 0)
             {
@@ -98,7 +93,7 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-        if (canMove && (Input.GetKeyUp(KeyCode.UpArrow) || Input.GetKeyUp(KeyCode.Space)))
+        if (Input.GetKeyUp(KeyCode.UpArrow) || Input.GetKeyUp(KeyCode.Space))
         {
             isJumping = false;
         }
@@ -117,7 +112,7 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (!isWallJumping && canMove)
+        if (!isWallJumping)
         {
             rb.velocity = new Vector2(moveInput * maxSpeed + (isConveyor ? 2 : 0), rb.velocity.y);
         }
@@ -251,8 +246,7 @@ public class PlayerMovement : MonoBehaviour
          * Handling Editing Mode
          */
 
-        //Debug.Log(gameManager.curStage);
-        if (gameManager != null) gameManager.EditMode();
+        gameManager.EditMode();
 
         //yield return new 
         

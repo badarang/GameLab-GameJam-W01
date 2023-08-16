@@ -6,9 +6,7 @@ using UnityEngine;
 
 public class DontDestroyObject : MonoBehaviour
 {
-    public static DontDestroyObject instance = null;
-    // Start is called before the first frame update
-
+    private static DontDestroyObject instance = null;
     public static DontDestroyObject Instance
     {
         get
@@ -31,12 +29,38 @@ public class DontDestroyObject : MonoBehaviour
         else
         {
             Destroy(gameObject);
+            return;
         }
-        
+
+        InitOtherManagers();
+    }
+
+    private void InitOtherManagers()
+    {
+        _gameManager.Init();
     }
 
     private static void SetupInstance()
     {
         instance = FindObjectOfType<DontDestroyObject>();
+    }
+
+    private static GameManager _gameManager = new GameManager();
+    public static GameManager gameManager
+    {
+        get
+        {
+            return _gameManager;
+        }
+    }
+
+    public bool IsEditMode()
+    {
+        return _gameManager.playMode == PlayMode.EDIT;
+    }
+
+    public void GoLobby()
+    {
+        _gameManager.GoLobby();
     }
 }

@@ -16,9 +16,7 @@ public class GetButtonTextAndOpenScene : MonoBehaviour
     public void OpenScene()
     {
         SceneManager.LoadScene("Stage" + buttonText.text);
-        GameObject obj = GameObject.Find("GameManager");
-        obj.GetComponent<GameManager>().curStage = Int32.Parse(buttonText.text);
-        obj.GetComponent<GameManager>().StartStage();
+        DontDestroyObject.gameManager.StartStage(Int32.Parse(buttonText.text));
     }
 
     // Update is called once per frame
