@@ -21,12 +21,42 @@
             }
         },
         {
+            "type": 8,
+            "isHalfRotated": false,
+            "rotation": 0,
+            "startGridPos": {
+                "x": 17,
+                "y": 2,
+                "z": 0
+            }
+        },
+        {
+            "type": 15,
+            "isHalfRotated": false,
+            "rotation": 0,
+            "startGridPos": {
+                "x": 17,
+                "y": 1,
+                "z": 0
+            }
+        },
+        {
+            "type": 2,
+            "isHalfRotated": false,
+            "rotation": 0,
+            "startGridPos": {
+                "x": 27,
+                "y": 3,
+                "z": 0
+            }
+        },
+        {
             "type": 11,
             "isHalfRotated": false,
             "rotation": 0,
             "startGridPos": {
-                "x": 13,
-                "y": 1,
+                "x": 29,
+                "y": 5,
                 "z": 0
             }
         }
