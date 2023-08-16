@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using Unity.VisualScripting.Dependencies.NCalc;
 using UnityEngine;
 
@@ -36,7 +37,7 @@ public class ArrowTrap : MonoBehaviour
                 }
                 else
                 {
-                    Instantiate(projectile, spawnLocation.position, spawnRotation);
+                    Instantiate(projectile, spawnLocation.position, Quaternion.Inverse(transform.rotation));
                 }
                 timeSinceSpawned = 0;
             }
