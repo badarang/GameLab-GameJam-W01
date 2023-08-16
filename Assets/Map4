@@ -9,7 +9,7 @@
                 "y": 2,
                 "z": 0
             }
-        }
+        },
         {
             "type": 12,
             "isHalfRotated": true,
@@ -19,7 +19,7 @@
                 "y": 6,
                 "z": 0
             }
-        }
+        },
         {
             "type": 12,
             "isHalfRotated": true,
@@ -29,7 +29,7 @@
                 "y": 10,
                 "z": 0
             }
-        }
+        },
         {
             "type": 12,
             "isHalfRotated": true,
@@ -39,14 +39,364 @@
                 "y": 14,
                 "z": 0
             }
-        }
+        },
         {
             "type": 12,
             "isHalfRotated": true,
-            "rotation": 90,
+            "rotation": 270,
+            "startGridPos": {
+                "x": 4,
+                "y": 4,
+                "z": 0
+            }
+        },
+        {
+            "type": 12,
+            "isHalfRotated": true,
+            "rotation": 270,
+            "startGridPos": {
+                "x": 4,
+                "y": 8,
+                "z": 0
+            }
+        },
+        {
+            "type": 12,
+            "isHalfRotated": true,
+            "rotation": 270,
+            "startGridPos": {
+                "x": 22,
+                "y": 24,
+                "z": 0
+            }
+        },
+        {
+            "type": 12,
+            "isHalfRotated": true,
+            "rotation": 270,
+            "startGridPos": {
+                "x": 4,
+                "y": 12,
+                "z": 0
+            }
+        },
+        {
+            "type": 12,
+            "isHalfRotated": true,
+            "rotation": 270,
+            "startGridPos": {
+                "x": 4,
+                "y": 12,
+                "z": 0
+            }
+        },
+        {
+            "type": 13,
+            "isHalfRotated": false,
+            "rotation": 180,
+            "startGridPos": {
+                "x": 11,
+                "y": 19,
+                "z": 0
+            }
+        },
+        {
+            "type": 13,
+            "isHalfRotated": false,
+            "rotation": 180,
+            "startGridPos": {
+                "x": 14,
+                "y": 19,
+                "z": 0
+            }
+        },
+        {
+            "type": 13,
+            "isHalfRotated": false,
+            "rotation": 0,
+            "startGridPos": {
+                "x": 17,
+                "y": 18,
+                "z": 0
+            }
+        },
+        {
+            "type": 13,
+            "isHalfRotated": false,
+            "rotation": 0,
+            "startGridPos": {
+                "x": 20,
+                "y": 18,
+                "z": 0
+            }
+        },
+        {
+            "type": 10,
+            "isHalfRotated": false,
+            "rotation": 0,
+            "startGridPos": {
+                "x": 3,
+                "y": 22,
+                "z": 0
+            }
+        },
+        {
+            "type": 2,
+            "isHalfRotated": false,
+            "rotation": 0,
+            "startGridPos": {
+                "x": 18,
+                "y": 21,
+                "z": 0
+            }
+        },
+        {
+            "type": 9,
+            "isHalfRotated": false,
+            "rotation": 0,
+            "startGridPos": {
+                "x": 24,
+                "y": 10,
+                "z": 0
+            }
+        },
+        {
+            "type": 15,
+            "isHalfRotated": false,
+            "rotation": 0,
+            "startGridPos": {
+                "x": 24,
+                "y": 22,
+                "z": 0
+            }
+        },
+        {
+            "type": 15,
+            "isHalfRotated": false,
+            "rotation": 0,
+            "startGridPos": {
+                "x": 26,
+                "y": 22,
+                "z": 0
+            }
+        },
+        {
+            "type": 15,
+            "isHalfRotated": false,
+            "rotation": 0,
+            "startGridPos": {
+                "x": 28,
+                "y": 22,
+                "z": 0
+            }
+        },
+        {
+            "type": 15,
+            "isHalfRotated": true,
+            "rotation": 270,
+            "startGridPos": {
+                "x": 40,
+                "y": 26,
+                "z": 0
+            }
+        },
+        {
+            "type": 15,
+            "isHalfRotated": true,
+            "rotation": 270,
+            "startGridPos": {
+                "x": 40,
+                "y": 29,
+                "z": 0
+            }
+        },
+        {
+            "type": 15,
+            "isHalfRotated": false,
+            "rotation": 0,
+            "startGridPos": {
+                "x": 30,
+                "y": 22,
+                "z": 0
+            }
+        },
+        {
+            "type": 15,
+            "isHalfRotated": false,
+            "rotation": 0,
+            "startGridPos": {
+                "x": 32,
+                "y": 22,
+                "z": 0
+            }
+        },
+        {
+            "type": 15,
+            "isHalfRotated": false,
+            "rotation": 0,
+            "startGridPos": {
+                "x": 36,
+                "y": 22,
+                "z": 0
+            }
+        },
+        {
+            "type": 15,
+            "isHalfRotated": false,
+            "rotation": 0,
+            "startGridPos": {
+                "x": 34,
+                "y": 22,
+                "z": 0
+            }
+        },
+        {
+            "type": 2,
+            "isHalfRotated": false,
+            "rotation": 0,
+            "startGridPos": {
+                "x": 38,
+                "y": 19,
+                "z": 0
+            }
+        },
+        {
+            "type": 2,
+            "isHalfRotated": false,
+            "rotation": 0,
+            "startGridPos": {
+                "x": 39,
+                "y": 23,
+                "z": 0
+            }
+        },
+        {
+            "type": 4,
+            "isHalfRotated": false,
+            "rotation": 0,
+            "startGridPos": {
+                "x": 26,
+                "y": 25,
+                "z": 0
+            }
+        },
+        {
+            "type": 4,
+            "isHalfRotated": false,
+            "rotation": 180,
+            "startGridPos": {
+                "x": 24,
+                "y": 27,
+                "z": 0
+            }
+        },
+        {
+            "type": 14,
+            "isHalfRotated": false,
+            "rotation": 0,
+            "startGridPos": {
+                "x": 31,
+                "y": 27,
+                "z": 0
+            }
+        },
+        {
+            "type": 14,
+            "isHalfRotated": false,
+            "rotation": 0,
+            "startGridPos": {
+                "x": 34,
+                "y": 27,
+                "z": 0
+            }
+        },
+        {
+            "type": 15,
+            "isHalfRotated": false,
+            "rotation": 0,
+            "startGridPos": {
+                "x": 32,
+                "y": 30,
+                "z": 0
+            }
+        },
+        {
+            "type": 15,
+            "isHalfRotated": false,
+            "rotation": 0,
+            "startGridPos": {
+                "x": 35,
+                "y": 30,
+                "z": 0
+            }
+        },
+        {
+            "type": 5,
+            "isHalfRotated": false,
+            "rotation": 0,
+            "startGridPos": {
+                "x": 10,
+                "y": 27,
+                "z": 0
+            }
+        },
+        {
+            "type": 5,
+            "isHalfRotated": false,
+            "rotation": 0,
+            "startGridPos": {
+                "x": 18,
+                "y": 27,
+                "z": 0
+            }
+        },
+        {
+            "type": 13,
+            "isHalfRotated": false,
+            "rotation": 0,
+            "startGridPos": {
+                "x": 4,
+                "y": 28,
+                "z": 0
+            }
+        },
+        {
+            "type": 13,
+            "isHalfRotated": false,
+            "rotation": 0,
+            "startGridPos": {
+                "x": 6,
+                "y": 28,
+                "z": 0
+            }
+        },
+        {
+            "type": 13,
+            "isHalfRotated": false,
+            "rotation": 0,
             "startGridPos": {
                 "x": 8,
-                "y": 2,
+                "y": 28,
+                "z": 0
+            }
+        },
+        {
+            "type": 11,
+            "isHalfRotated": false,
+            "rotation": 0,
+            "startGridPos": {
+                "x": 5,
+                "y": 28,
+                "z": 0
+            }
+        },
+        {
+            "type": 11,
+            "isHalfRotated": false,
+            "rotation": 0,
+            "startGridPos": {
+                "x": 7,
+                "y": 28,
                 "z": 0
             }
         }
