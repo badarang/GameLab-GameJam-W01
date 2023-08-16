@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6984886095790526319}
   - component: {fileID: -4290783337528569557}
   m_Layer: 0
-  m_Name: 9-Sliced
+  m_Name: SlowTile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
