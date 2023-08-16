@@ -5,8 +5,8 @@ using UnityEngine;
 public class DropPlatform : MonoBehaviour
 {
 
-    public float fallDelay = 0;
-    private float destroyDelay = 1f;
+    private float fallDelay = .2f;
+    private float destroyDelay = 2f;
     private float startX;
     private float startY;
 
@@ -14,8 +14,6 @@ public class DropPlatform : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        startX = rb.position.x;
-        startY = rb.position.y;
     }
 
     // Update is called once per frame
@@ -27,18 +25,29 @@ public class DropPlatform : MonoBehaviour
     {
         if(collision.gameObject.CompareTag("Player"))
         {
-            StartCoroutine(Fall());
+            if (collision.transform.position.y > transform.position.y)
+            {
+                StartCoroutine(Fall());
+            }
         }
     }
     IEnumerator Fall()
     {
+        startX = rb.position.x;
+        startY = rb.position.y;
         yield return new WaitForSeconds(fallDelay);
         rb.bodyType = RigidbodyType2D.Dynamic;
+        yield return new WaitForSeconds(destroyDelay);
+        rb.position = new Vector2(-1000, -1000);
+        yield return new WaitForSeconds(5.0f);
+        ReturnToOriginalPlace();
         //Destroy(gameObject, destroyDelay);
     }
 
     void ReturnToOriginalPlace()
     {
+        rb.velocity = Vector2.zero;
         rb.position = new Vector2(startX, startY);
+        rb.bodyType = RigidbodyType2D.Kinematic;
     }
 }
