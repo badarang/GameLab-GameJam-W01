@@ -263,6 +263,7 @@ public class GridSelector : MonoBehaviour
         Vector3 position = (startPos + endPos) / 2;
 
         g.GetComponent<Transform>().position = position;
+        g.GetComponent<BlockBase>().SetInitialPos(position);
 
         IDeletable deletable = g.GetComponent<IDeletable>();
         if (deletable != null)
