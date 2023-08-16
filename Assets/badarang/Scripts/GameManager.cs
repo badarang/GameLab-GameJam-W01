@@ -15,6 +15,8 @@ public class GameManager
     private UICameraControl editCamera;
     private GameObject selectionUI;
 
+    private Action OnExitEditModeCallbacks;
+
     public void StartStage(int stageNum)
     {
         gridSelector = UnityEngine.Object.FindObjectOfType<GridSelector>();
@@ -45,6 +47,8 @@ public class GameManager
         editCamera.Init();
         editCamera.enabled = false;
         selectionUI.SetActive(false);
+
+        OnExitEditModeCallbacks?.Invoke();
     }
 
     public void Init()
@@ -71,6 +75,11 @@ public class GameManager
         yield return new WaitForEndOfFrame();
         loadState = SceneLoadState.ENDLOAD;
         StartStage(stageNum);
+    }
+
+    public void RegisterExitEditorCallback(Action callback)
+    {
+        OnExitEditModeCallbacks += callback;
     }
 }
 

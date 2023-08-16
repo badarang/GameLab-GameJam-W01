@@ -9,6 +9,7 @@ public class BlockBase : MonoBehaviour
     public bool isHalfRotated;
     public int rotation;
     public Vector3Int startGridPos;
+    public Vector3 initialPos;
 
     public void SetStartGridPos(Vector3Int startGridPos)
     {
@@ -19,5 +20,10 @@ public class BlockBase : MonoBehaviour
     {
         this.isHalfRotated = isHalfRotated;
         this.rotation = rotation;
+    }
+
+    public void SetInitialPos(Vector3 pos)
+    {
+        initialPos = pos;
     }
 }
