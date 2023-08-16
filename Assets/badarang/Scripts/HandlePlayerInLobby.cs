@@ -7,7 +7,7 @@ public class HandlePlayerInLobby : MonoBehaviour
     Rigidbody2D rb;
     public float jumpTime;
     private float jumpSpeed = 8.0f;
-    private float moveSpeed = 6.0f;
+    public float moveSpeed = 6.0f;
     public float jumpDelay;
     public Animator squashStretchAnimator;
 
