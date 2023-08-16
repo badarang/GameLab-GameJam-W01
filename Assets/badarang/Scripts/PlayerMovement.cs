@@ -61,7 +61,6 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        transform.rotation = Quaternion.Euler (0.0f, 0.0f, 0.0f);
         canMove = !DontDestroyObject.Instance.IsEditMode();
         if (canMove) moveInput = Input.GetAxisRaw("Horizontal");
         else moveInput = 0;
@@ -117,6 +116,7 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
+        transform.rotation = Quaternion.identity;
         if (!isWallJumping)
         {
             float conveyorMultipleValue = 1;
