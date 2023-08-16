@@ -32,6 +32,7 @@ public class GameManager
 
         playCamera.enabled = false;
         editCamera.enabled = true;
+        editCamera.Init();
         selectionUI.SetActive(true);
     }
     
@@ -40,6 +41,7 @@ public class GameManager
         playMode = PlayMode.PLAY;
 
         playCamera.enabled = true;
+        editCamera.Init();
         editCamera.enabled = false;
         selectionUI.SetActive(false);
     }

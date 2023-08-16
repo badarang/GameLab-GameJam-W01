@@ -13,6 +13,11 @@ public class DeletableBlock : BlockBase, IDeletable
     private Action<GameObject> onHoverCallback;
     private Action<GameObject> onExitHoverCallback;
 
+    private BoxCollider2D[] colliders;
+    private BoxCollider2D clickCollider;
+    private bool originalTriggerFlag;
+    private Vector2 originalColliderSize;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -27,9 +32,39 @@ public class DeletableBlock : BlockBase, IDeletable
 
     }
 
+    public void InitDeletable(Vector2Int blockSize)
+    {
+        colliders = GetComponentsInChildren<BoxCollider2D>();
+
+        clickCollider = GetComponent<BoxCollider2D>();
+        if (clickCollider == null)
+        {
+            clickCollider = gameObject.AddComponent<BoxCollider2D>();
+            clickCollider.isTrigger = true;
+            clickCollider.size = blockSize;
+        }
+
+        originalTriggerFlag = clickCollider.isTrigger;
+        originalColliderSize = clickCollider.size;
+    }
+
     public void SetDeletable(bool deletable)
     {
         this.deletable = deletable;
+
+        foreach (Collider2D c in colliders)
+        {
+            c.enabled = !deletable;
+        }
+
+        clickCollider.enabled = true;
+        clickCollider.isTrigger = deletable;
+
+        if (!deletable)
+        {
+            clickCollider.isTrigger = originalTriggerFlag;
+            clickCollider.size = originalColliderSize;
+        }
     }
 
     public void SetOnDeleteCallback(Action<GameObject> callback)
@@ -68,19 +103,16 @@ public class DeletableBlock : BlockBase, IDeletable
 
     public void OnMouseDown()
     {
-        Debug.Log("click");
         onClicked();
     }
 
     public void OnMouseOver()
     {
-        Debug.Log("hover");
         onHovered();
     }
 
     public void OnMouseExit()
     {
-        Debug.Log("exit");
         onExited();
     }
 }
