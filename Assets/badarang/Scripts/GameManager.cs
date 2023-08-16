@@ -17,6 +17,8 @@ public class GameManager
 
     private Action OnExitEditModeCallbacks;
 
+    private int deathCount;
+
     public void StartStage(int stageNum)
     {
         gridSelector = UnityEngine.Object.FindObjectOfType<GridSelector>();
@@ -25,6 +27,8 @@ public class GameManager
         playCamera = UnityEngine.Object.FindObjectOfType<CameraFollow>();
         editCamera = UnityEngine.Object.FindObjectOfType<UICameraControl>();
         selectionUI = GameObject.Find("SelectionUI");
+
+        deathCount = -1;
 
         EditMode();
     }
@@ -37,6 +41,13 @@ public class GameManager
         editCamera.enabled = true;
         editCamera.Init();
         selectionUI.SetActive(true);
+
+        deathCount += 1;
+
+        if (deathCount > 0)
+        {
+            selectionUI.GetComponentInChildren<ChangeScore>().PlayScore(deathCount - 1, deathCount);
+        }
     }
     
     public void ExitEditMode()
