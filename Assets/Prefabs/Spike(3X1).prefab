@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 3558382838480151395}
   - component: {fileID: 8585241612082858787}
   m_Layer: 0
-  m_Name: Spine(3X1)
+  m_Name: Spike(3X1)
   m_TagString: Spike
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

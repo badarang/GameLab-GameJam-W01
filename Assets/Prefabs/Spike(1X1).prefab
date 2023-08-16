@@ -96,8 +96,8 @@ GameObject:
   - component: {fileID: -6474901165522105226}
   - component: {fileID: -6791319535857549805}
   m_Layer: 0
-  m_Name: Spine(1X1)
-  m_TagString: Untagged
+  m_Name: Spike(1X1)
+  m_TagString: Spike
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -160,6 +160,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 0
+  isHalfRotated: 0
+  rotation: 0
   startGridPos: {x: 0, y: 0, z: 0}
 --- !u!1 &6116323047262137455
 GameObject:
