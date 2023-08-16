@@ -123,7 +123,7 @@ public class PlayerMovement : MonoBehaviour
             float conveyorMultipleValue = 1;
             if (isConveyor)
             {
-                if (moveInput > 0) conveyorMultipleValue = 2;
+                if (moveInput > 0) conveyorMultipleValue = 1.2f;
                 else if (moveInput < 0) conveyorMultipleValue = .5f;
                 else conveyorMultipleValue = 1;
             }
