@@ -54,7 +54,7 @@ public class PlayerMovement : MonoBehaviour
         startY = rb.transform.position.y;
         newColor = spr.color;
 
-        gameManager = DontDestroyObject.instance.GetComponentInChildren<GameManager>();
+        gameManager = DontDestroyObject.gameManager;
     }
 
     void Update()
@@ -246,7 +246,6 @@ public class PlayerMovement : MonoBehaviour
          * Handling Editing Mode
          */
 
-        Debug.Log(gameManager.curStage);
         gameManager.EditMode();
 
         //yield return new 
