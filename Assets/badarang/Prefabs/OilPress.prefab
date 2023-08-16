@@ -410,7 +410,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6e71515ae4a94f46a5d26899678a6b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 0
+  type: 13
   isHalfRotated: 0
   rotation: 0
   startGridPos: {x: 0, y: 0, z: 0}

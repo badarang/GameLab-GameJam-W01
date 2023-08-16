@@ -17,11 +17,12 @@ public class UICameraControl : MonoBehaviour
     private Vector3 curMousePos = Vector3.zero;
     private Vector3 prevMousePos = Vector3.zero;
 
+    private Vector3 minXYPos = new Vector3(-15, -15, -10);
+
     // Start is called before the first frame update
     void Start()
     {
-        UICamera.orthographicSize = initialSize;
-        transform.position = initialPos;
+        Init();
     }
 
     // Update is called once per frame
@@ -65,5 +66,11 @@ public class UICameraControl : MonoBehaviour
             curMousePos = Vector3.zero;
             prevMousePos = Vector3.zero;
         }
+    }
+
+    public void Init()
+    {
+        UICamera.orthographicSize = initialSize;
+        transform.position = initialPos;
     }
 }

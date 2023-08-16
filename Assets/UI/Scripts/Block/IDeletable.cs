@@ -15,4 +15,6 @@ public interface IDeletable
     public void onHovered();
 
     public void onExited();
+
+    public void InitDeletable(Vector2Int blockSize);
 }
