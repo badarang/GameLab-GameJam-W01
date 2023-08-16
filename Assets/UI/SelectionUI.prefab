@@ -526,8 +526,8 @@ MonoBehaviour:
   - {fileID: 2572632066276420333, guid: 217f722c61dfb9c4cbf96b6ee5077cc6, type: 3}
   allObjPrefabs:
   - {fileID: 8486206249960146280, guid: 45b3fb8d8adac2643b55c00f3ecc9067, type: 3}
-  - {fileID: 6001130048508072627, guid: 151ca60a0ff60fe428cfd6dc20a2d19b, type: 3}
-  - {fileID: 759293611566594152, guid: 415dd73b5e5309d48b9ac03042943082, type: 3}
+  - {fileID: 8297011467313994197, guid: eda49c27d3bdb4e43bd54a9c25ce252b, type: 3}
+  - {fileID: 8297011467313994197, guid: eda49c27d3bdb4e43bd54a9c25ce252b, type: 3}
   blockTypes: 020000000300000004000000
   selectGridPrefab: {fileID: 1834612303965327278, guid: 49b1f32097ec0d645b3cde025a071e7d, type: 3}
   unableGridPrefab: {fileID: 7505700961843725355, guid: 26c7d9e3ed25f754a9493dadf3c3e8a1, type: 3}
