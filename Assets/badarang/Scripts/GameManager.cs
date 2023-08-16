@@ -1,40 +1,64 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class GameManager : MonoBehaviour
+public class GameManager
 {
-    public GameObject selectionUI;
-    public PlayManager playManager;
+    private GameObject selectionUI;
+    private PlayManager playManager;
+    private GridSelector gridSelector;
 
-    public int curStage;
-    // Start is called before the first frame update
-    void Start()
+    public PlayMode playMode;
+    public SceneLoadState loadState;
+
+    public void StartStage(int stageNum)
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    public void StartStage()
-    {/*
-        GameObject uiObj = Instantiate(selectionUI);
-        playManager = uiObj.transform.Find("PlayManager").GetComponent<PlayManager>();
-        playManager.playCamera = FindObjectOfType<CameraFollow>();
-        playManager.editCamera = FindObjectOfType<UICameraControl>();
-
-        playManager.editMode = false;*/
+        gridSelector = Object.FindObjectOfType<GridSelector>();
+        gridSelector.InitSelectionUI(stageNum);
+        playMode = PlayMode.EDIT;
     }
 
     public void EditMode()
     {
-        Debug.Log("enter edit mode1");
-        playManager = FindObjectOfType<PlayManager>();
+        playManager = Object.FindObjectOfType<PlayManager>();
         playManager.editMode = true;
-        Debug.Log("enter edit mode2");
     }
+
+    public void Init()
+    {
+        playMode = PlayMode.LOBBY;
+        loadState = SceneLoadState.ENDLOAD;
+    }
+
+    public void GoLobby()
+    {
+        playMode = PlayMode.LOBBY;
+        SceneManager.LoadScene("Lobby");
+    }
+
+    private IEnumerator LoadSceneCo(string name)
+    {
+        loadState = SceneLoadState.LOAD;
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(name, LoadSceneMode.Single);
+        while (!asyncLoad.isDone)
+        {
+            yield return null;
+        }
+        yield return new WaitForEndOfFrame();
+        loadState = SceneLoadState.ENDLOAD;
+    }
+}
+
+public enum PlayMode
+{
+    LOBBY,
+    PLAY,
+    EDIT
+}
+
+public enum SceneLoadState
+{
+    LOAD,
+    ENDLOAD
 }

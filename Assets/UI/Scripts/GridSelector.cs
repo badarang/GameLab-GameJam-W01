@@ -61,64 +61,72 @@ public class GridSelector : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (selectedBlockInfo.type != BlockType.NONE && selectedBlockInfo.type != BlockType.DELETE)
-        {
-            hoverPos = selectionTilemap.WorldToCell(Camera.main.ScreenToWorldPoint(Input.mousePosition));
-            if (hoverPos != prevHoverPos)
+        if (hasInitialized && DontDestroyObject.Instance.IsEditMode()) {
+            if (selectedBlockInfo.type != BlockType.NONE && selectedBlockInfo.type != BlockType.DELETE)
             {
-                foreach (GameObject g in instantiatedSelectGrids)
+                hoverPos = selectionTilemap.WorldToCell(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+                if (hoverPos != prevHoverPos)
                 {
-                    Destroy(g);
-                }
-
-                instantiatedSelectGrids = new List<GameObject>();
-
-                Vector3 targetPos = selectionTilemap.GetCellCenterWorld(hoverPos);
-                Vector2Int blockSize = selectedBlockInfo.isHalfRotated ? new Vector2Int(blockSizeData[selectedBlockInfo.type].y, blockSizeData[selectedBlockInfo.type].x) : blockSizeData[selectedBlockInfo.type];
-                Vector3 startPos = GetStartGridPos(targetPos, blockSize);
-
-                for (int i = 0; i < blockSize.x; i++)
-                {
-                    for (int j = 0; j < blockSize.y; j++)
+                    foreach (GameObject g in instantiatedSelectGrids)
                     {
-                        GameObject g = Instantiate(selectGridPrefab);
-
-                        instantiatedSelectGrids.Add(g);
-                        g.GetComponent<Transform>().position =
-                            new Vector3(
-                                startPos.x + selectionTilemap.cellSize.x * i,
-                                startPos.y + selectionTilemap.cellSize.y * j,
-                                startPos.z
-                            );
+                        Destroy(g);
                     }
+
+                    instantiatedSelectGrids = new List<GameObject>();
+
+                    Vector3 targetPos = selectionTilemap.GetCellCenterWorld(hoverPos);
+                    Vector2Int blockSize = 
+                        selectedBlockInfo.isHalfRotated ? 
+                        new Vector2Int(blockSizeData[selectedBlockInfo.type].y, blockSizeData[selectedBlockInfo.type].x) : 
+                        blockSizeData[selectedBlockInfo.type];
+                    Vector3 startPos = GetStartGridPos(targetPos, blockSize);
+
+                    for (int i = 0; i < blockSize.x; i++)
+                    {
+                        for (int j = 0; j < blockSize.y; j++)
+                        {
+                            GameObject g = Instantiate(selectGridPrefab);
+
+                            instantiatedSelectGrids.Add(g);
+                            g.GetComponent<Transform>().position =
+                                new Vector3(
+                                    startPos.x + selectionTilemap.cellSize.x * i,
+                                    startPos.y + selectionTilemap.cellSize.y * j,
+                                    startPos.z
+                                );
+                        }
+                    }
+
+                    prevHoverPos = hoverPos;
                 }
 
-                prevHoverPos = hoverPos;
-            }
-
-            if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
-            {
-                Vector3 targetPos = selectionTilemap.GetCellCenterWorld(hoverPos);
-                Vector2Int blockSize = selectedBlockInfo.isHalfRotated ? new Vector2Int(blockSizeData[selectedBlockInfo.type].y, blockSizeData[selectedBlockInfo.type].x) : blockSizeData[selectedBlockInfo.type];
-                selectedBlockInfo.startGridPos = selectionTilemap.WorldToCell(GetStartGridPos(targetPos, blockSize));
-                PlaceBlockObj(selectedBlockInfo);
-            }
-        }
-        else
-        {
-            if (instantiatedSelectGrids == null)
-            {
-                instantiatedSelectGrids = new List<GameObject>();
-            }
-
-            if (instantiatedSelectGrids.Count != 0)
-            {
-                foreach (GameObject g in instantiatedSelectGrids)
+                if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
                 {
-                    Destroy(g);
+                    Vector3 targetPos = selectionTilemap.GetCellCenterWorld(hoverPos);
+                    Vector2Int blockSize = 
+                        selectedBlockInfo.isHalfRotated ? 
+                        new Vector2Int(blockSizeData[selectedBlockInfo.type].y, blockSizeData[selectedBlockInfo.type].x) : 
+                        blockSizeData[selectedBlockInfo.type];
+                    selectedBlockInfo.startGridPos = selectionTilemap.WorldToCell(GetStartGridPos(targetPos, blockSize));
+                    PlaceBlockObj(selectedBlockInfo);
+                }
+            }
+            else
+            {
+                if (instantiatedSelectGrids == null)
+                {
+                    instantiatedSelectGrids = new List<GameObject>();
                 }
 
-                instantiatedSelectGrids = new List<GameObject>();
+                if (instantiatedSelectGrids.Count != 0)
+                {
+                    foreach (GameObject g in instantiatedSelectGrids)
+                    {
+                        Destroy(g);
+                    }
+
+                    instantiatedSelectGrids = new List<GameObject>();
+                }
             }
         }
     }
@@ -211,7 +219,10 @@ public class GridSelector : MonoBehaviour
         g.GetComponent<BlockBase>().SetStartGridPos(blockInfo.startGridPos);
         g.GetComponent<Transform>().rotation = Quaternion.Euler(new Vector3(0, 0, blockInfo.rotation));
 
-        Vector2Int blockSize = blockInfo.isHalfRotated ? new Vector2Int(blockSizeData[blockInfo.type].y, blockSizeData[blockInfo.type].x) : blockSizeData[blockInfo.type]; 
+        Vector2Int blockSize = 
+            blockInfo.isHalfRotated ? 
+            new Vector2Int(blockSizeData[blockInfo.type].y, blockSizeData[blockInfo.type].x) : 
+            blockSizeData[blockInfo.type]; 
         Vector3 startPos = selectionTilemap.GetCellCenterWorld(blockInfo.startGridPos);
         Vector3 endPos = GetEndGridPos(startPos, blockSize);
         Vector3 position = (startPos + endPos) / 2;
