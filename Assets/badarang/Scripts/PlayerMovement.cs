@@ -47,7 +47,7 @@ public class PlayerMovement : MonoBehaviour
     private float startX, startY;
     private float curTime;
     private Color newColor;
-    [SerializeField] private bool canMove;
+    [SerializeField] private bool canMove = true;
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -60,7 +60,10 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        canMove = !playManager.GetComponent<PlayManager>().editMode;
+        if (playManager != null)
+        {
+            canMove = !playManager.GetComponent<PlayManager>().editMode;
+        }
         if (canMove) moveInput = Input.GetAxisRaw("Horizontal");
         if (moveInput != 0) gameObject.transform.SetParent(null);
         isGrounded = Physics2D.OverlapCircle(feetPos.position, checkRadius, groundLayer);
@@ -248,8 +251,8 @@ public class PlayerMovement : MonoBehaviour
          * Handling Editing Mode
          */
 
-        Debug.Log(gameManager.curStage);
-        gameManager.EditMode();
+        //Debug.Log(gameManager.curStage);
+        if (gameManager != null) gameManager.EditMode();
 
         //yield return new 
         
