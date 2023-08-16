@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7877029645965033815}
   - component: {fileID: 1995744982364298273}
   - component: {fileID: -2451203658080649190}
+  - component: {fileID: 3077965178778919815}
   m_Layer: 0
   m_Name: StickyPlatform
   m_TagString: Untagged
@@ -75,7 +76,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: -5177388603050735206, guid: 8884154dfe85442a3a3578be807dbcdf, type: 3}
   m_Color: {r: 0.2193947, g: 0.46226418, b: 0, a: 1}
   m_FlipX: 0
@@ -99,8 +100,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d623bc316526eb24a8f8014d499999ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!61 &1995744982364298273
-BoxCollider2D:
+--- !u!70 &3077965178778919815
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}

@@ -60,6 +60,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        transform.rotation = Quaternion.Euler (0.0f, 0.0f, 0.0f);
         canMove = !DontDestroyObject.Instance.IsEditMode();
         if (canMove) moveInput = Input.GetAxisRaw("Horizontal");
         else moveInput = 0;
@@ -117,7 +118,15 @@ public class PlayerMovement : MonoBehaviour
     {
         if (!isWallJumping)
         {
-            rb.velocity = new Vector2(moveInput * maxSpeed + (isConveyor ? 2 : 0), rb.velocity.y);
+            float conveyorMultipleValue = 1;
+            if (isConveyor)
+            {
+                if (moveInput > 0) conveyorMultipleValue = 2;
+                else if (moveInput < 0) conveyorMultipleValue = .5f;
+                else conveyorMultipleValue = 1;
+            }
+            
+            rb.velocity = new Vector2(conveyorMultipleValue * (moveInput * maxSpeed) + (isConveyor ? 2 : 0), rb.velocity.y);
         }
     }
 
@@ -217,7 +226,7 @@ public class PlayerMovement : MonoBehaviour
 
     IEnumerator Co_CoyoteTimer()
     {
-        yield return new WaitForSecondsRealtime(.2f);
+        yield return new WaitForSecondsRealtime(.02f);
         isCoyoteTime = false;
     }
     
@@ -247,7 +256,7 @@ public class PlayerMovement : MonoBehaviour
         yield return new WaitForSeconds(1.0f);
         curTime = 0;
         isMoveToStartPosition = true;
-        yield return new WaitForSeconds( 3.0f);
+        yield return new WaitForSeconds(2.0f);
         isMoveToStartPosition = false;
 
         /*
