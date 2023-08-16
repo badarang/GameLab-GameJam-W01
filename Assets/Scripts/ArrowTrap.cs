@@ -35,9 +35,17 @@ public class ArrowTrap : MonoBehaviour
                 //Debug.Log(Quaternion.Euler(new Vector3(0, 0, rotationZ)));
                 Instantiate(projectile, spawnLocation.position, transform.parent.transform.rotation);
             }
-            else
+            else if (this.transform.eulerAngles.z == 90 || this.transform.eulerAngles.z == 270)
             {
+                Debug.Log("2");
                 Instantiate(projectile, spawnLocation.position, Quaternion.Inverse(transform.rotation));
+            }
+            else if(this.transform.eulerAngles.z == 0)
+            {
+                Instantiate(projectile, spawnLocation.position, Quaternion.Euler(0, 0, 180));
+            }else
+            {
+                Instantiate(projectile, spawnLocation.position, Quaternion.Euler(0, 0, 0));
             }
             timeSinceSpawned = 0;
         }
