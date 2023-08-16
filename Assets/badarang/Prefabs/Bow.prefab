@@ -818,7 +818,7 @@ MonoBehaviour:
   projectile: {fileID: 132142789247655361, guid: 9e9fe47ea01e34a4088f6fab4543f4f3, type: 3}
   spawnLocation: {fileID: 6675828716270885744}
   spawnRotation: {x: 0, y: 0, z: 0, w: 0}
-  spawnTime: 2
+  spawnTime: 1.5
 --- !u!114 &3873448174061639673
 MonoBehaviour:
   m_ObjectHideFlags: 0

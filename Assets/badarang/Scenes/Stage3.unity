@@ -666,6 +666,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: GroundTile
       objectReference: {fileID: 0}
+    - target: {fileID: 1703027973428682966, guid: 1456fee9f66d302448855ab785f889ae, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1703027973428682966, guid: 1456fee9f66d302448855ab785f889ae, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
     - target: {fileID: 4651315388601847139, guid: 1456fee9f66d302448855ab785f889ae, type: 3}
       propertyPath: m_CompositePaths.m_Paths.Array.size
       value: 14
