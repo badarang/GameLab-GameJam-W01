@@ -170,6 +170,7 @@ public class PlayerMovement : MonoBehaviour
 
         if ((Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.Space)) && wallJumpingCounter > 0f)
         {
+            audioSource.PlayOneShot(jumpSound);
             isWallJumping = true;
             rb.velocity = new Vector2(wallJumpingDirection * wallJumpingSpeed.x, wallJumpingSpeed.y);
             wallJumpingCounter = 0f;
