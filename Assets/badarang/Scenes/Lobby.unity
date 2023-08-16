@@ -1060,6 +1060,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1099148789}
   - component: {fileID: 1099148790}
+  - component: {fileID: 1099148791}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -1097,6 +1098,18 @@ MonoBehaviour:
   selectionUI: {fileID: 6644317143846823728, guid: 2ae5aeacd0913a3479221d4b30c3f235, type: 3}
   playManager: {fileID: 0}
   curStage: 1
+--- !u!114 &1099148791
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1099148788}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30fcf4fc15969bc4fa7c0cb085e9a0b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1190492891
 GameObject:
   m_ObjectHideFlags: 0
@@ -2154,30 +2167,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1678068355}
   m_CullTransparentMesh: 1
---- !u!1 &1843313649 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3703162532519346755, guid: 9f86bd235713fba439110888d3c6b405, type: 3}
-  m_PrefabInstance: {fileID: 1952061868}
-  m_PrefabAsset: {fileID: 0}
---- !u!95 &1843313652 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 3703162532519346756, guid: 9f86bd235713fba439110888d3c6b405, type: 3}
-  m_PrefabInstance: {fileID: 1952061868}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1843313655
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1843313649}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3b3a355115733bc4e8a93db4d64378ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  animator: {fileID: 1843313652}
-  fireWorkParticle: {fileID: 180128, guid: 6586ff0f14125534cae2f5d8f04b7871, type: 3}
 --- !u!1001 &1952061868
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2233,8 +2222,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 1077984504, guid: 9f86bd235713fba439110888d3c6b405, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9f86bd235713fba439110888d3c6b405, type: 3}
 --- !u!1 &2097874370
 GameObject:
