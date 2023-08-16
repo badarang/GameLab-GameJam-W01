@@ -268,9 +268,8 @@ public class PlayerMovement : MonoBehaviour
     void HandlingDie()
     {
         GameObject particle = Instantiate(testParticleSystem, rb.transform.position + new Vector3(0f, 0f, 0f), transform.rotation);
-
         ParticleSystem particlesys = particle.GetComponent<ParticleSystem>();
-        particlesys.Play();
+        if (!(particlesys.isPlaying)) particlesys.Play();
 
         //gameObject.SetActive(false);
         newColor.a = 0f;
