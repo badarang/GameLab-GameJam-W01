@@ -9,6 +9,7 @@ public class CatapultPlatform : MonoBehaviour
     public float motorSpeed;
     public float motorForce;
 
+    public float speed =40;
     private HingeJoint2D hinge;
     private JointMotor2D motor;
 
@@ -16,6 +17,7 @@ public class CatapultPlatform : MonoBehaviour
     private float timer;
     private bool timerStart;
 
+    GameObject player;
 
     // Start is called before the first frame update
     void Start()
@@ -43,10 +45,12 @@ public class CatapultPlatform : MonoBehaviour
             }
         }
     }
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionExit2D(Collision2D collision)
     {
         if(collision.gameObject.tag == "Player")
         {
+            player = GameObject.Find("Player");
+            player.GetComponent<Rigidbody2D>().AddForce(transform.right * speed, ForceMode2D.Impulse);
             timerStart = true;
         }
 
