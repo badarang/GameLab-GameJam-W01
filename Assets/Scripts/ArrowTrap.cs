@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting.Dependencies.NCalc;
 using UnityEngine;
 
 public class ArrowTrap : MonoBehaviour
@@ -24,11 +25,20 @@ public class ArrowTrap : MonoBehaviour
     void Update()
     {
         timeSinceSpawned += Time.deltaTime;
-
-        if (timeSinceSpawned >= spawnTime)
-        {
-            Instantiate(projectile, spawnLocation.position, spawnRotation);
-            timeSinceSpawned = 0;
-        }
+            if (timeSinceSpawned >= spawnTime)
+            {
+                if (transform.parent != null)
+                {
+                    //float rotationZ = transform.parent.transform.rotation.z;
+                    //Debug.Log("z:" + rotationZ);
+                    //Debug.Log(Quaternion.Euler(new Vector3(0, 0, rotationZ)));
+                    Instantiate(projectile, spawnLocation.position, transform.parent.transform.rotation);
+                }
+                else
+                {
+                    Instantiate(projectile, spawnLocation.position, spawnRotation);
+                }
+                timeSinceSpawned = 0;
+            }
     }
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class RotatePlatform : MonoBehaviour
 {
-    public float degreePerSecond;
+    public float degreePerSecond = 50.0f;
     // Start is called before the first frame update
     void Start()
     {
