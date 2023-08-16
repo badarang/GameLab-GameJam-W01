@@ -28,9 +28,10 @@ public class PlayerMovement : MonoBehaviour
 
     private bool isWallJumping;
     private float wallJumpingDirection;
+    private float wallJumpingTime = .2f;
     private float wallJumpingCounter;
-    private float wallJumpingDuration = .05f;
-    private Vector2 wallJumpingSpeed = new Vector2(8f, 12f);
+    private float wallJumpingDuration = .4f;
+    private Vector2 wallJumpingSpeed = new Vector2(8f, 13f);
     Rigidbody2D rb;
     public Transform wallCheck;
     public LayerMask wallLayer;
@@ -65,7 +66,7 @@ public class PlayerMovement : MonoBehaviour
         if (canMove) moveInput = Input.GetAxisRaw("Horizontal");
         else moveInput = 0;
         if (moveInput != 0) gameObject.transform.SetParent(null);
-        isGrounded = Physics2D.OverlapCircle(feetPos.position, checkRadius, groundLayer);
+        isGrounded = Physics2D.OverlapCircle(feetPos.position, checkRadius, groundLayer) || Physics2D.OverlapCircle(feetPos.position, checkRadius, wallLayer);
         if (dirtCreateDelay > 0f)
         {
             dirtCreateDelay -= .01f;
@@ -142,37 +143,51 @@ public class PlayerMovement : MonoBehaviour
         if (IsWalled() && !isGrounded && moveInput != 0f)
         {
             isWallSliding = true;
-            //Debug.Log(Mathf.Clamp(rb.velocity.y, -wallSlidingSpeed, float.MaxValue));
+            rb.velocity = new Vector2(rb.velocity.x, Mathf.Clamp(rb.velocity.y, -wallSlidingSpeed, float.MaxValue));
         }
         else
         {
             isWallSliding = false;
         }
-
-        if (isWallSliding)
-        {
-            rb.velocity = new Vector2(rb.velocity.x, Mathf.Clamp(rb.velocity.y, -wallSlidingSpeed, float.MaxValue));
-        }
     }
 
     private void WallJump()
     {
-        if ((Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.Space)) && isWallSliding)
+        if (isWallSliding)
         {
-            isWallJumping = true;
-            audioSource.PlayOneShot(jumpSound);
-            squashStretchAnimator.SetTrigger("Jump");
-            Invoke(nameof(StopWallJumping), wallJumpingDuration);
+            isWallJumping = false;
+            wallJumpingDirection = -transform.localScale.x;
+            wallJumpingCounter = wallJumpingTime;
+
+            CancelInvoke(nameof(StopWallJumping));
+        }
+        else
+        {
+            wallJumpingCounter -= Time.deltaTime;
         }
 
-        if (isWallJumping)
+        if ((Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.Space)) && wallJumpingCounter > 0f)
         {
-            rb.velocity = new Vector2(-moveInput * wallJumpingSpeed.x, wallJumpingSpeed.y);
+            isWallJumping = true;
+            rb.velocity = new Vector2(wallJumpingDirection * wallJumpingSpeed.x, wallJumpingSpeed.y);
+            wallJumpingCounter = 0f;
+
+            if (transform.localScale.x != wallJumpingDirection)
+            {
+                isFacingRight = !isFacingRight;
+                Vector3 localScale = transform.localScale;
+                localScale.x *= -1f;
+                transform.localScale = localScale;
+            }
+
+            Invoke(nameof(StopWallJumping), wallJumpingDuration);
+            canMove = false;
         }
     }
 
     private void StopWallJumping()
     {
+        canMove = true;
         isWallJumping = false;
     }
    
@@ -213,14 +228,20 @@ public class PlayerMovement : MonoBehaviour
             isConveyor = false;
         }
     }
-
+    
     #region CoyoteTime
+    /*
     private void OnCollisionExit2D(Collision2D collision)
     {
         if (collision.collider.tag == "Ground" && rb.velocity.y <= 0)
         {
             isCoyoteTime = true;
             StartCoroutine(Co_CoyoteTimer());
+        }
+        
+        if (collision.collider.tag == "Ground")
+        {
+            isWallSliding = false;
         }
     }
 
@@ -229,7 +250,7 @@ public class PlayerMovement : MonoBehaviour
         yield return new WaitForSecondsRealtime(.02f);
         isCoyoteTime = false;
     }
-    
+    */
     #endregion
     
     
