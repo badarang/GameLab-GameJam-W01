@@ -23,6 +23,7 @@ public class PlayerMovement : MonoBehaviour
     private float dirtCreateDelay = 0f;
     private bool isConveyor;
     private bool isMoveToStartPosition = false;
+    private bool isDied = false;
 
     public bool isWallSliding;
     private float wallSlidingSpeed = 2f;
@@ -209,7 +210,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (other.CompareTag("Arrow"))
         {
-            HandlingDie();
+            if (!isDied) HandlingDie();
         }
     }
 
@@ -222,7 +223,7 @@ public class PlayerMovement : MonoBehaviour
         
         if (collision.collider.CompareTag("Spike"))
         {
-            HandlingDie();
+            if (!isDied) HandlingDie();
         }
     }
 
@@ -267,9 +268,10 @@ public class PlayerMovement : MonoBehaviour
 
     void HandlingDie()
     {
+        isDied = true;
         GameObject particle = Instantiate(testParticleSystem, rb.transform.position + new Vector3(0f, 0f, 0f), transform.rotation);
         ParticleSystem particlesys = particle.GetComponent<ParticleSystem>();
-        if (!(particlesys.isPlaying)) particlesys.Play();
+        particlesys.Play();
 
         //gameObject.SetActive(false);
         newColor.a = 0f;
@@ -286,6 +288,7 @@ public class PlayerMovement : MonoBehaviour
         curTime = 0;
         isMoveToStartPosition = true;
         yield return new WaitForSeconds(4.0f);
+        isDied = false;
         isMoveToStartPosition = false;
 
         /*
@@ -306,7 +309,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (collision.CompareTag("OilPress"))
         {
-            HandlingDie();
+            if (!isDied) HandlingDie();
         }
 
         if (collision.CompareTag("Spring"))
