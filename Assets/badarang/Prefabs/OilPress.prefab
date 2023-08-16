@@ -114,7 +114,7 @@ GameObject:
   - component: {fileID: 6634076062296273911}
   - component: {fileID: 2687475273114150878}
   - component: {fileID: 7777786481283742318}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: OilPressHead
   m_TagString: OilPress
   m_Icon: {fileID: 0}
@@ -241,9 +241,9 @@ GameObject:
   - component: {fileID: 2195882902614392968}
   - component: {fileID: 7732263206882327750}
   - component: {fileID: 5450068414590312052}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: OilPressBody
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -352,9 +352,9 @@ GameObject:
   - component: {fileID: 8486206249960146281}
   - component: {fileID: 5632162049309208062}
   - component: {fileID: -8771257091375749164}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: OilPress
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -414,3 +414,4 @@ MonoBehaviour:
   isHalfRotated: 0
   rotation: 0
   startGridPos: {x: 0, y: 0, z: 0}
+  initialPos: {x: 0, y: 0, z: 0}

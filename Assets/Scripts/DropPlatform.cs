@@ -33,8 +33,9 @@ public class DropPlatform : MonoBehaviour
     }
     IEnumerator Fall()
     {
-        startX = rb.position.x;
-        startY = rb.position.y;
+        Vector3 startPos = GetComponent<BlockBase>().initialPos;
+        startX = startPos.x;
+        startY = startPos.y;
         yield return new WaitForSeconds(fallDelay);
         rb.bodyType = RigidbodyType2D.Dynamic;
         yield return new WaitForSeconds(destroyDelay);
