@@ -37,7 +37,14 @@ public class ArrowTrap : MonoBehaviour
             }
             else
             {
-                Instantiate(projectile, spawnLocation.position, Quaternion.Inverse(transform.rotation));
+                if (transform.rotation.z == 180)
+                {
+                    Instantiate(projectile, spawnLocation.position, Quaternion.Euler(transform.rotation));
+                }
+                else
+                {
+                    Instantiate(projectile, spawnLocation.position, Quaternion.Inverse(transform.rotation));
+                }
             }
             timeSinceSpawned = 0;
         }
