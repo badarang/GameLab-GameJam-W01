@@ -33,6 +33,7 @@ public class DontDestroyObject : MonoBehaviour
         }
 
         InitOtherManagers();
+        shoudSceneLoad = false;
     }
 
     private void InitOtherManagers()
@@ -62,5 +63,23 @@ public class DontDestroyObject : MonoBehaviour
     public void GoLobby()
     {
         _gameManager.GoLobby();
+    }
+
+    public void LoadScene(int stageNum)
+    {
+        targetStage = stageNum;
+        shoudSceneLoad = true;
+    }
+
+    private bool shoudSceneLoad;
+    private int targetStage;
+
+    public void Update()
+    {
+        if (shoudSceneLoad)
+        {
+            shoudSceneLoad = false;
+            StartCoroutine(_gameManager.LoadScene(targetStage));
+        }
     }
 }

@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3703162532519346756}
   - component: {fileID: 3703162532519346759}
   - component: {fileID: 1843313655}
+  - component: {fileID: 3703162533588942515}
   m_Layer: 0
   m_Name: Flag
   m_TagString: Untagged
@@ -102,9 +103,23 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3703162532519346755}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3b3a355115733bc4e8a93db4d64378ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 3703162532519346756}
+  fireWorkParticle: {fileID: 180128, guid: 6586ff0f14125534cae2f5d8f04b7871, type: 3}
+--- !u!114 &3703162533588942515
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3703162532519346755}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7fc8bf3ca386dd4b83335ed711e7798, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 3703162532519346756}

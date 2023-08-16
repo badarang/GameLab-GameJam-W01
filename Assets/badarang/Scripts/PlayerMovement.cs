@@ -30,7 +30,7 @@ public class PlayerMovement : MonoBehaviour
     private float wallJumpingDirection;
     private float wallJumpingCounter;
     private float wallJumpingDuration = .05f;
-    private Vector2 wallJumpingSpeed = new Vector2(16f, 16f);
+    private Vector2 wallJumpingSpeed = new Vector2(8f, 12f);
     Rigidbody2D rb;
     public Transform wallCheck;
     public LayerMask wallLayer;
@@ -183,6 +183,11 @@ public class PlayerMovement : MonoBehaviour
         {
             squashStretchAnimator.SetTrigger("Landing");
         }
+        
+        if (collision.collider.CompareTag("Spike"))
+        {
+            HandlingDie();
+        }
     }
 
     private void OnCollisionStay2D(Collision2D other)
@@ -256,16 +261,16 @@ public class PlayerMovement : MonoBehaviour
         eye1.color = new Color(1f, 1f, 1f, 1f);
         eye2.color = new Color(1f, 1f, 1f, 1f);
     }
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.CompareTag("Spike"))
+        if (collision.CompareTag("OilPress"))
         {
             HandlingDie();
         }
 
         if (collision.CompareTag("Spring"))
         {
-            rb.velocity = Vector2.up * jumpSpeed * 2;
+            rb.velocity = Vector2.up * jumpSpeed * 3;
             audioSource.PlayOneShot(jumpSound);
         }
     }
