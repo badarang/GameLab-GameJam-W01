@@ -128,20 +128,7 @@ public class GridSelector : MonoBehaviour
             }
             else
             {
-                if (instantiatedSelectGrids == null)
-                {
-                    instantiatedSelectGrids = new List<GameObject>();
-                }
-
-                if (instantiatedSelectGrids.Count != 0)
-                {
-                    foreach (GameObject g in instantiatedSelectGrids)
-                    {
-                        Destroy(g);
-                    }
-
-                    instantiatedSelectGrids = new List<GameObject>();
-                }
+                InitSelectionUIObjs();
             }
         }
     }
@@ -164,7 +151,7 @@ public class GridSelector : MonoBehaviour
         }
 
         mapLoader = GetComponent<MapLoader>();
-        curMapData = mapLoader.LoadMap(0);
+        curMapData = mapLoader.LoadMap(level - 1);
 
         foreach (BlockInfo b in curMapData.installableBlocks)
         {
@@ -194,16 +181,14 @@ public class GridSelector : MonoBehaviour
 
     public void SetBlock(BlockInfo blockInfo)
     {
+        if (selectedBlockInfo.type == BlockType.DELETE)
+        {
+            SetDeletableFlag(false);
+        }
+
         selectedBlockInfo = blockInfo;
 
-        foreach (GameObject g in instantiatedBlockObjs)
-        {
-            IDeletable deletable = g.GetComponent<IDeletable>();
-            if (deletable != null)
-            {
-                deletable.SetDeletable(blockInfo.type == BlockType.DELETE);
-            }
-        }
+        SetDeletableFlag(blockInfo.type == BlockType.DELETE);
     }
 
     private void AddButton(BlockInfo blockInfo)
@@ -314,9 +299,11 @@ public class GridSelector : MonoBehaviour
 
     public void FinishEditMode()
     {
-        Debug.Log(DontDestroyObject.gameManager.playMode);
         if (DontDestroyObject.gameManager.playMode == PlayMode.EDIT)
         {
+            InitSelectionUIObjs();
+            InitDeletionUIObjs();
+            SetDeletableFlag(false);
             clickedParticle.transform.position = Input.mousePosition;
             clickedParticle.Play();
             DontDestroyObject.gameManager.ExitEditMode();
@@ -340,6 +327,54 @@ public class GridSelector : MonoBehaviour
             startPos.y + (selectionTilemap.cellSize.y * (blockSize.y - 1)),
             0);
         return endPos;
+    }
+
+    private void SetDeletableFlag(bool isBlockDeletable)
+    {
+        foreach (GameObject g in instantiatedBlockObjs)
+        {
+            IDeletable deletable = g.GetComponent<IDeletable>();
+            if (deletable != null)
+            {
+                deletable.SetDeletable(isBlockDeletable);
+            }
+        }
+    }
+
+    private void InitSelectionUIObjs()
+    {
+        if (instantiatedSelectGrids == null)
+        {
+            instantiatedSelectGrids = new List<GameObject>();
+        }
+
+        if (instantiatedSelectGrids.Count != 0)
+        {
+            foreach (GameObject g in instantiatedSelectGrids)
+            {
+                Destroy(g);
+            }
+
+            instantiatedSelectGrids = new List<GameObject>();
+        }
+    }
+
+    private void InitDeletionUIObjs()
+    {
+        if (instantiatedUnableGrids == null)
+        {
+            instantiatedUnableGrids = new List<GameObject>();
+        }
+
+        if (instantiatedUnableGrids.Count != 0)
+        {
+            foreach (GameObject g in instantiatedUnableGrids)
+            {
+                Destroy(g);
+            }
+
+            instantiatedUnableGrids = new List<GameObject>();
+        }
     }
 }
 
