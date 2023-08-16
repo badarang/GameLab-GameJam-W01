@@ -5,29 +5,23 @@ using UnityEngine;
 
 public class StickyPlatform : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
+    GameObject player;
+    
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if(collision.gameObject.tag =="Player")
         {
-            collision.transform.SetParent(transform);
+            player = GameObject.Find("Player");
+            player.GetComponent<PlayerMovement>().maxSpeed /= 2;
+            player.GetComponent<PlayerMovement>().jumpSpeed = 0;
         }
     }
     
     void OnCollisionExit2D(Collision2D collision)
     {
-        collision.transform.SetParent(null);
+
+        player.GetComponent<PlayerMovement>().maxSpeed *= 2;
+        player.GetComponent<PlayerMovement>().jumpSpeed = 8;
     }
 
 }
