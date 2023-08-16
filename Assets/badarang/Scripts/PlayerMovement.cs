@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 using UnityEngine.UIElements;
 
 public class PlayerMovement : MonoBehaviour
@@ -36,7 +37,6 @@ public class PlayerMovement : MonoBehaviour
     public Transform wallCheck;
     public LayerMask wallLayer;
     public Animator squashStretchAnimator;
-    
     [SerializeField] private GameObject testParticleSystem = default;
     [SerializeField] private GameObject dirtParticle = default;
 

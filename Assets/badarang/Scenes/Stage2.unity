@@ -588,6 +588,10 @@ PrefabInstance:
       value: Spine(1X1)
       objectReference: {fileID: 0}
     - target: {fileID: 6001130048508072627, guid: 986668019122ef84aa9d2e885f2a392a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6001130048508072627, guid: 986668019122ef84aa9d2e885f2a392a, type: 3}
       propertyPath: m_TagString
       value: Spike
       objectReference: {fileID: 0}
@@ -782,6 +786,10 @@ PrefabInstance:
     - target: {fileID: 4208723455663141817, guid: 7bb5186494800844a8025f1e5cc278fb, type: 3}
       propertyPath: m_Name
       value: RotatingPlatform (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4208723455663141817, guid: 7bb5186494800844a8025f1e5cc278fb, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7bb5186494800844a8025f1e5cc278fb, type: 3}

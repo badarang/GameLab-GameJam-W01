@@ -1,7 +1,37 @@
 {
     "defaultBlocks": [
+        {
+        "type": 8,
+        "isHalfRotated": false,
+        "rotation": 0,
+        "startGridPos": {
+            "x": 13,
+            "y": 0,
+            "z": 0
+            }
+        },
+        {
+        "type": 11,
+        "isHalfRotated": false,
+        "rotation": 0,
+        "startGridPos": {
+            "x": 13,
+            "y": 1,
+            "z": 0
+            }
+        },
+        {
+            "type": 11,
+            "isHalfRotated": false,
+            "rotation": 0,
+            "startGridPos": {
+                "x": 13,
+                "y": 1,
+                "z": 0
+            }
+        }
     ],
-"installableBlocks": [
+    "installableBlocks": [
         {
             "type": 2,
             "isHalfRotated": false,
@@ -53,4 +83,4 @@
             }
         }
     ]
-    }
+}
