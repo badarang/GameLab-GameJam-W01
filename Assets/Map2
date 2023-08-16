@@ -1,7 +1,7 @@
 {
     "defaultBlocks": [
     ],
-"installableBlocks": [
+    "installableBlocks": [
         {
             "type": 2,
             "isHalfRotated": false,
@@ -23,7 +23,7 @@
             }
         },
         {
-            "type": 4,
+            "type": 10,
             "isHalfRotated": false,
             "rotation": 0,
             "startGridPos": {
@@ -43,7 +43,7 @@
             }
         },
         {
-            "type": 9,
+            "type": 5,
             "isHalfRotated": false,
             "rotation": 0,
             "startGridPos": {
