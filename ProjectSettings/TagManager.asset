@@ -12,6 +12,7 @@ TagManager:
   - ConveyorBelt
   - Spring
   - OilPress
+  - Arrow
   layers:
   - Default
   - TransparentFX
