@@ -20,7 +20,7 @@ public class MapLoader : MonoBehaviour
 
     public MapData LoadMap(int level)
     {
-        string path = Path.Combine(Application.dataPath, "Map" + level);
+        string path = Path.Combine(Application.streamingAssetsPath, "Map" + level);
 
         string jsonText = File.ReadAllText(path);
         MapData mapData = JsonUtility.FromJson<MapData>(jsonText);

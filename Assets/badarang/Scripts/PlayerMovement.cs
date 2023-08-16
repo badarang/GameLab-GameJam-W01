@@ -108,8 +108,9 @@ public class PlayerMovement : MonoBehaviour
         if (isMoveToStartPosition)
         {
             curTime += Time.deltaTime;
+            Debug.Log(curTime / 100f);
             gameObject.transform.position =
-                Vector3.Lerp(gameObject.transform.position, new Vector3(startX, startY, 0), curTime / 100);
+                Vector3.Lerp(gameObject.transform.position, new Vector3(startX, startY, 0), curTime / 100f);
         }
     }
 
@@ -285,7 +286,7 @@ public class PlayerMovement : MonoBehaviour
         yield return new WaitForSeconds(1.0f);
         curTime = 0;
         isMoveToStartPosition = true;
-        yield return new WaitForSeconds(2.0f);
+        yield return new WaitForSeconds(4.0f);
         isMoveToStartPosition = false;
 
         /*
