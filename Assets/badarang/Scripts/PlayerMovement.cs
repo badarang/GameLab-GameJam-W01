@@ -47,6 +47,7 @@ public class PlayerMovement : MonoBehaviour
     private float startX, startY;
     private float curTime;
     private Color newColor;
+    private bool canMove;
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -59,7 +60,9 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        moveInput = Input.GetAxisRaw("Horizontal");
+        canMove = !DontDestroyObject.Instance.IsEditMode();
+        if (canMove) moveInput = Input.GetAxisRaw("Horizontal");
+        else moveInput = 0;
         if (moveInput != 0) gameObject.transform.SetParent(null);
         isGrounded = Physics2D.OverlapCircle(feetPos.position, checkRadius, groundLayer);
         if (dirtCreateDelay > 0f)
@@ -75,7 +78,7 @@ public class PlayerMovement : MonoBehaviour
             particlesys.Play();
         }
         
-        if ((isGrounded || isCoyoteTime) && (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.Space)))
+        if (canMove && (isGrounded || isCoyoteTime) && (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.Space)))
         {
             audioSource.PlayOneShot(jumpSound);
             isJumping = true;
@@ -84,7 +87,7 @@ public class PlayerMovement : MonoBehaviour
             squashStretchAnimator.SetTrigger("Jump");
         }
 
-        if ((Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.Space)) && isJumping == true)
+        if (canMove && (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.Space)) && isJumping == true)
         {
             if (jumpTimeCounter > 0)
             {
@@ -93,7 +96,7 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyUp(KeyCode.UpArrow) || Input.GetKeyUp(KeyCode.Space))
+        if (canMove && (Input.GetKeyUp(KeyCode.UpArrow) || Input.GetKeyUp(KeyCode.Space)))
         {
             isJumping = false;
         }

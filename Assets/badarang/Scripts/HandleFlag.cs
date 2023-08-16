@@ -34,8 +34,7 @@ public class HandleFlag : MonoBehaviour
         yield return new WaitForSeconds(1.0f);
         createFireWork();
         yield return new WaitForSeconds(1.0f);
-        GameObject obj = GameObject.Find("GameManager");
-        obj.GetComponent<GoToLobby>().goLobbyScene();
+        DontDestroyObject.gameManager.GoLobby();
     }
 
     void createFireWork()
