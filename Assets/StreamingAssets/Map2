@@ -219,6 +219,26 @@
                 "y": 18,
                 "z": 0
             }
+        },
+        {
+            "type": 14,
+            "isHalfRotated": false,
+            "rotation": 0,
+            "startGridPos": {
+                "x": 15,
+                "y": 16,
+                "z": 0
+            }
+        },
+        {
+            "type": 14,
+            "isHalfRotated": false,
+            "rotation": 0,
+            "startGridPos": {
+                "x": 22,
+                "y": 16,
+                "z": 0
+            }
         }
     ],
     "installableBlocks": [
