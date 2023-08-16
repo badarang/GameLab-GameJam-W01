@@ -5,6 +5,7 @@ using UnityEngine.Tilemaps;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System;
+using TMPro;
 
 public class GridSelector : MonoBehaviour
 {
@@ -16,6 +17,9 @@ public class GridSelector : MonoBehaviour
 
     [SerializeField]
     public List<BlockType> blockTypes;
+
+    [SerializeField]
+    public List<string> blockString;
 
     public GameObject selectGridPrefab;
     public GameObject unableGridPrefab;
@@ -33,6 +37,10 @@ public class GridSelector : MonoBehaviour
     private List<GameObject> instantiatedSelectGrids;
     private List<GameObject> instantiatedUnableGrids;
     private List<GameObject> instantiatedBlockObjs;
+
+    private HashSet<Vector2Int> preventedBlocksSet;
+    private Vector2Int minTileBound = new Vector2Int(-30, -30);
+    private Vector2Int maxTileBound = new Vector2Int(120, 60);
 
     public GameObject clickedParticle;
 
@@ -59,6 +67,7 @@ public class GridSelector : MonoBehaviour
 
     private Dictionary<BlockType, GameObject> blockObjectData;
     private Dictionary<BlockType, GameObject> blockBtnImgData;
+    private Dictionary<BlockType, string> blockBtnNameData;
 
     private MapLoader mapLoader;
     private MapData curMapData;
@@ -90,6 +99,8 @@ public class GridSelector : MonoBehaviour
                 }
 
                 hoverPos = selectionTilemap.WorldToCell(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+                bool isValidToPlace = IsValidPositionToPlace(new Vector2Int(hoverPos.x, hoverPos.y));
+
                 if (hoverPos != prevHoverPos)
                 {
                     foreach (GameObject g in instantiatedSelectGrids)
@@ -112,6 +123,11 @@ public class GridSelector : MonoBehaviour
                         {
                             GameObject g = Instantiate(selectGridPrefab);
 
+                            if (!isValidToPlace)
+                            {
+                                g.GetComponent<SpriteRenderer>().color = new Color(.9f, .3f, .3f, .4f);
+                            }
+
                             instantiatedSelectGrids.Add(g);
                             g.GetComponent<Transform>().position =
                                 new Vector3(
@@ -125,7 +141,7 @@ public class GridSelector : MonoBehaviour
                     prevHoverPos = hoverPos;
                 }
 
-                if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
+                if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject() && isValidToPlace)
                 {
                     Vector3 targetPos = selectionTilemap.GetCellCenterWorld(hoverPos);
                     Vector2Int blockSize = 
@@ -148,6 +164,7 @@ public class GridSelector : MonoBehaviour
     {
         blockObjectData = new Dictionary<BlockType, GameObject>();
         blockBtnImgData = new Dictionary<BlockType, GameObject>();
+        blockBtnNameData = new Dictionary<BlockType, string>();
 
         // Initialize all blocks info
         if (allObjPrefabs.Count != blockTypes.Count || allObjPrefabs.Count != btnImgPrefabs.Count)
@@ -159,6 +176,7 @@ public class GridSelector : MonoBehaviour
         {
             blockObjectData.Add(blockTypes[i], allObjPrefabs[i]);
             blockBtnImgData.Add(blockTypes[i], btnImgPrefabs[i]);
+            blockBtnNameData.Add(blockTypes[i], blockString[i]);
         }
 
         mapLoader = GetComponent<MapLoader>();
@@ -187,6 +205,8 @@ public class GridSelector : MonoBehaviour
         nonBlockInfo.type = BlockType.NONE;
         selectedBlockInfo = nonBlockInfo;
 
+        SearchPreventedBlocks();
+
         hasInitialized = true;
     }
 
@@ -213,11 +233,15 @@ public class GridSelector : MonoBehaviour
 
         if (blockInfo.type != BlockType.DELETE)
         {
+            b.transform.Find("BlockName").GetComponent<TextMeshProUGUI>().text = blockBtnNameData[blockInfo.type];
+
             GameObject bimg = Instantiate(blockBtnImgData[blockInfo.type]);
             bimg.GetComponent<RectTransform>().SetParent(b.GetComponent<RectTransform>());
             bimg.GetComponent<RectTransform>().rotation = Quaternion.Euler(new Vector3(0, 0, blockInfo.rotation));
         } else
         {
+            b.transform.Find("BlockName").GetComponent<TextMeshProUGUI>().text = "ªË¡¶";
+
             GameObject bimg = Instantiate(deleteButtonImagePrefab);
             bimg.GetComponent<RectTransform>().SetParent(b.GetComponent<RectTransform>());
         }
@@ -391,6 +415,47 @@ public class GridSelector : MonoBehaviour
 
             instantiatedUnableGrids = new List<GameObject>();
         }
+    }
+
+    private void SearchPreventedBlocks()
+    {
+        preventedBlocksSet = new HashSet<Vector2Int>();
+
+        GameObject preventedTileObj = GameObject.Find("PreventTilemap");
+        Tilemap preventedTilemap = preventedTileObj.GetComponent<Tilemap>();
+
+        for (int i = minTileBound.x; i < maxTileBound.x; i++)
+        {
+            for (int j = minTileBound.y; j < maxTileBound.y; j++)
+            {
+                if (preventedTilemap.HasTile(new Vector3Int(i, j, 0)))
+                {
+                    preventedBlocksSet.Add(new Vector2Int(i, j));
+                }
+            }
+        }
+    }
+
+    private bool IsValidPositionToPlace(Vector2Int hoverPosition)
+    {
+        Vector2Int blockSize =
+            selectedBlockInfo.isHalfRotated ?
+            new Vector2Int(blockSizeData[selectedBlockInfo.type].y, blockSizeData[selectedBlockInfo.type].x) :
+            blockSizeData[selectedBlockInfo.type];
+
+        Vector2Int startBlockPos = hoverPosition - (blockSize / 2);
+
+        for (int i = startBlockPos.x; i < startBlockPos.x + blockSize.x; i++)
+        {
+            for (int j = startBlockPos.y; j < startBlockPos.y + blockSize.y; j++)
+            {
+                if (preventedBlocksSet.Contains(new Vector2Int(i, j)))
+                {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 }
 

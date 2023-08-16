@@ -524,7 +524,7 @@ MonoBehaviour:
   - {fileID: 2572632066276420333, guid: d7e527a84d3aace4d9a3c17407c928a0, type: 3}
   - {fileID: 2572632066276420333, guid: 3b9fe47745e69a945b047cf05f8413fd, type: 3}
   - {fileID: 2572632066276420333, guid: 4f5bdc3a2aa4426428d32e06da0db2f9, type: 3}
-  - {fileID: 2572632066276420333, guid: 217f722c61dfb9c4cbf96b6ee5077cc6, type: 3}
+  - {fileID: 2572632066276420333, guid: f62c8607ed4fd744896b83f9ebc04dfc, type: 3}
   - {fileID: 2572632066276420333, guid: 8c879484d1c04d94783fc6a3b3ad5992, type: 3}
   - {fileID: 2572632066276420333, guid: 8c879484d1c04d94783fc6a3b3ad5992, type: 3}
   - {fileID: 2572632066276420333, guid: ebb8b38ead384294da277d9ed6d54367, type: 3}
@@ -551,6 +551,21 @@ MonoBehaviour:
   - {fileID: 4544904404064082267, guid: 8ce000d13da9b4346a4da7388bae3291, type: 3}
   - {fileID: 8893132159091951137, guid: 4ce6522bd926c3946b00476916ea6945, type: 3}
   blockTypes: 02000000030000000400000005000000060000000700000008000000090000000a0000000b0000000c0000000d0000000e0000000f000000
+  blockString:
+  - "\uC2A4\uD504\uB9C1"
+  - "\uAC00\uB85C\uC774\uB3D9"
+  - "\uC138\uB85C\uC774\uB3D9"
+  - "\uB099\uD558"
+  - "\uCE90\uD130\uD3F4\uD2B8"
+  - "\uC77C\uBC18"
+  - "\uD68C\uC804"
+  - "\uB300\uAD00\uB78C\uCC28"
+  - "\uCEE8\uBCA0\uC774\uC5B4"
+  - "\uC791\uC740\uAC00\uC2DC"
+  - "\uD070\uAC00\uC2DC"
+  - "\uC720\uC555"
+  - "\uB048\uC801\uC774"
+  - "\uD65C"
   selectGridPrefab: {fileID: 1834612303965327278, guid: 49b1f32097ec0d645b3cde025a071e7d, type: 3}
   unableGridPrefab: {fileID: 7505700961843725355, guid: 26c7d9e3ed25f754a9493dadf3c3e8a1, type: 3}
   selectButtonPrefab: {fileID: 2373509088641328063, guid: 835093176eb78b04ea06d55e788f5a1a, type: 3}
