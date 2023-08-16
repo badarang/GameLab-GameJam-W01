@@ -34,6 +34,8 @@ public class GridSelector : MonoBehaviour
     private List<GameObject> instantiatedUnableGrids;
     private List<GameObject> instantiatedBlockObjs;
 
+    public ParticleSystem clickedParticle;
+
     [SerializeField]
     public readonly Dictionary<BlockType, Vector2Int> blockSizeData = new Dictionary<BlockType, Vector2Int>()
     {
@@ -51,6 +53,8 @@ public class GridSelector : MonoBehaviour
     private MapData curMapData;
 
     private bool hasInitialized = false;
+    private BlockInfo deleteButtonInfo;
+    private BlockInfo nonBlockInfo;
 
     // Start is called before the first frame update
     void Start()
@@ -64,6 +68,16 @@ public class GridSelector : MonoBehaviour
         if (hasInitialized && DontDestroyObject.Instance.IsEditMode()) {
             if (selectedBlockInfo.type != BlockType.NONE && selectedBlockInfo.type != BlockType.DELETE)
             {
+                if (instantiatedUnableGrids.Count != 0)
+                {
+                    foreach (GameObject g in instantiatedUnableGrids)
+                    {
+                        Destroy(g);
+                    }
+
+                    instantiatedUnableGrids = new List<GameObject>();
+                }
+
                 hoverPos = selectionTilemap.WorldToCell(Camera.main.ScreenToWorldPoint(Input.mousePosition));
                 if (hoverPos != prevHoverPos)
                 {
@@ -109,6 +123,7 @@ public class GridSelector : MonoBehaviour
                         blockSizeData[selectedBlockInfo.type];
                     selectedBlockInfo.startGridPos = selectionTilemap.WorldToCell(GetStartGridPos(targetPos, blockSize));
                     PlaceBlockObj(selectedBlockInfo);
+                    FinishEditMode();
                 }
             }
             else
@@ -156,7 +171,7 @@ public class GridSelector : MonoBehaviour
             AddButton(b);
         }
 
-        BlockInfo deleteButtonInfo = new BlockInfo();
+        deleteButtonInfo = new BlockInfo();
         deleteButtonInfo.type = BlockType.DELETE;
         AddButton(deleteButtonInfo);
 
@@ -170,7 +185,7 @@ public class GridSelector : MonoBehaviour
             PlaceBlockObj(b);
         }
 
-        BlockInfo nonBlockInfo = new BlockInfo();
+        nonBlockInfo = new BlockInfo();
         nonBlockInfo.type = BlockType.NONE;
         selectedBlockInfo = nonBlockInfo;
 
@@ -238,7 +253,6 @@ public class GridSelector : MonoBehaviour
 
                 if (instantiatedUnableGrids.Count > 0)
                 {
-                    Debug.Log("delete");
                     foreach (GameObject g in instantiatedUnableGrids)
                     {
                         Destroy(g);
@@ -246,10 +260,11 @@ public class GridSelector : MonoBehaviour
 
                     instantiatedUnableGrids = new List<GameObject>();
                 }
+
+                FinishEditMode();
             });
 
             deletable.SetOnHoverCallback((target) => {
-                Debug.Log("Asdf");
                 if (instantiatedBlockObjs.Contains(target))
                 {
                     if (instantiatedUnableGrids.Count > 0)
@@ -295,6 +310,17 @@ public class GridSelector : MonoBehaviour
         }
 
         instantiatedBlockObjs.Add(g);
+    }
+
+    public void FinishEditMode()
+    {
+        Debug.Log(DontDestroyObject.gameManager.playMode);
+        if (DontDestroyObject.gameManager.playMode == PlayMode.EDIT)
+        {
+            clickedParticle.transform.position = Input.mousePosition;
+            clickedParticle.Play();
+            DontDestroyObject.gameManager.ExitEditMode();
+        }
     }
 
     private Vector3 GetStartGridPos(Vector3 targetPos, Vector2Int blockSize)

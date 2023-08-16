@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,24 +6,42 @@ using UnityEngine.SceneManagement;
 
 public class GameManager
 {
-    private GameObject selectionUI;
-    private PlayManager playManager;
     private GridSelector gridSelector;
 
     public PlayMode playMode;
     public SceneLoadState loadState;
 
+    private CameraFollow playCamera;
+    private UICameraControl editCamera;
+    private GameObject selectionUI;
+
     public void StartStage(int stageNum)
     {
-        gridSelector = Object.FindObjectOfType<GridSelector>();
+        gridSelector = UnityEngine.Object.FindObjectOfType<GridSelector>();
         gridSelector.InitSelectionUI(stageNum);
         playMode = PlayMode.EDIT;
+
+        playCamera = UnityEngine.Object.FindObjectOfType<CameraFollow>();
+        editCamera = UnityEngine.Object.FindObjectOfType<UICameraControl>();
+        selectionUI = GameObject.Find("SelectionUI");
     }
 
     public void EditMode()
     {
-        playManager = Object.FindObjectOfType<PlayManager>();
-        playManager.editMode = true;
+        playMode = PlayMode.EDIT;
+
+        playCamera.enabled = false;
+        editCamera.enabled = true;
+        selectionUI.SetActive(true);
+    }
+    
+    public void ExitEditMode()
+    {
+        playMode = PlayMode.PLAY;
+
+        playCamera.enabled = true;
+        editCamera.enabled = false;
+        selectionUI.SetActive(false);
     }
 
     public void Init()
@@ -37,16 +56,18 @@ public class GameManager
         SceneManager.LoadScene("Lobby");
     }
 
-    private IEnumerator LoadSceneCo(string name)
+    public IEnumerator LoadScene(int stageNum)
     {
         loadState = SceneLoadState.LOAD;
-        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(name, LoadSceneMode.Single);
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("Stage" + stageNum, LoadSceneMode.Single);
         while (!asyncLoad.isDone)
         {
             yield return null;
         }
+        Debug.Log("asdf");
         yield return new WaitForEndOfFrame();
         loadState = SceneLoadState.ENDLOAD;
+        StartStage(stageNum);
     }
 }
 
