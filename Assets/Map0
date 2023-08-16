@@ -24,8 +24,8 @@
     "installableBlocks": [
         {
             "type": 2,
-            "isHalfRotated": true,
-            "rotation": 90,
+            "isHalfRotated": false,
+            "rotation": 0,
             "startGridPos": {
                 "x": 0,
                 "y": 0,
@@ -33,7 +33,37 @@
             }
         },
         {
-            "type": 4,
+            "type": 7,
+            "isHalfRotated": false,
+            "rotation": 0,
+            "startGridPos": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+            }
+        },
+        {
+            "type": 6,
+            "isHalfRotated": false,
+            "rotation": 0,
+            "startGridPos": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+            }
+        },
+        {
+            "type": 3,
+            "isHalfRotated": false,
+            "rotation": 0,
+            "startGridPos": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+            }
+        },
+        {
+            "type": 9,
             "isHalfRotated": false,
             "rotation": 0,
             "startGridPos": {

@@ -2556,6 +2556,7 @@ GameObject:
   - component: {fileID: 148938767}
   - component: {fileID: 148938766}
   - component: {fileID: 148938764}
+  - component: {fileID: 4087671129607825903}
   m_Layer: 3
   m_Name: ConveyerSystem 1
   m_TagString: ConveyorBelt
@@ -2648,3 +2649,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19b709da3d82d324ebd303bf61aecc9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &4087671129607825903
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8253863479113559620}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f07bcbfcf78a22f4ca7225066ef21acc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 10
+  isHalfRotated: 0
+  rotation: 0
+  startGridPos: {x: 0, y: 0, z: 0}

@@ -67,6 +67,7 @@ GameObject:
   - component: {fileID: 1452458693737945886}
   - component: {fileID: 1452458693737945884}
   - component: {fileID: 1452458693737945883}
+  - component: {fileID: -9135665501796719229}
   m_Layer: 3
   m_Name: CatapultPlatform
   m_TagString: Ground
@@ -82,7 +83,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7408200590813964141}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.38, y: 1.11, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 3, y: 0.20000002, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -229,3 +230,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &-9135665501796719229
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7408200590813964141}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f07bcbfcf78a22f4ca7225066ef21acc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 6
+  isHalfRotated: 0
+  rotation: 0
+  startGridPos: {x: 0, y: 0, z: 0}

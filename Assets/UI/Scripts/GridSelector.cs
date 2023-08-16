@@ -34,14 +34,25 @@ public class GridSelector : MonoBehaviour
     private List<GameObject> instantiatedUnableGrids;
     private List<GameObject> instantiatedBlockObjs;
 
-    public ParticleSystem clickedParticle;
+    public GameObject clickedParticle;
 
     [SerializeField]
     public readonly Dictionary<BlockType, Vector2Int> blockSizeData = new Dictionary<BlockType, Vector2Int>()
     {
+        { BlockType.JUMP, new Vector2Int(1, 1) },
+        { BlockType.MOVE_HORIZONTAL, new Vector2Int(2, 1) },
+        { BlockType.MOVE_VERTICAL, new Vector2Int(2, 1) },
+        { BlockType.FALL, new Vector2Int(2, 1) },
+        { BlockType.JUMP_LAUNCHER, new Vector2Int(3, 1) },
+        { BlockType.NORMAL, new Vector2Int(3, 1) },
+        { BlockType.ROTATION, new Vector2Int(1, 1) },
+        { BlockType.FERRIS, new Vector2Int(6, 6) },
+        { BlockType.CONVEYOR, new Vector2Int(4, 1) },
+        { BlockType.SPIKE_SMALL, new Vector2Int(1, 1) },
+        { BlockType.SPIKE_BIG, new Vector2Int(1, 1) },
         { BlockType.OIL_PRESS, new Vector2Int(1, 1) },
-        { BlockType.SPINE_SMALL, new Vector2Int(1, 1) },
-        { BlockType.SPINE_BIG, new Vector2Int(3, 1) },
+        { BlockType.STICKY, new Vector2Int(3, 1) },
+        { BlockType.BOW, new Vector2Int(1, 1) },
         { BlockType.NONE, new Vector2Int(0, 0) },
         { BlockType.DELETE, new Vector2Int(0, 0) },
     };
@@ -232,6 +243,7 @@ public class GridSelector : MonoBehaviour
         IDeletable deletable = g.GetComponent<IDeletable>();
         if (deletable != null)
         {
+            deletable.InitDeletable(blockSizeData[blockInfo.type]);
             deletable.SetOnDeleteCallback((target) => {
                 instantiatedBlockObjs.Remove(target);
                 Destroy(target);
@@ -301,11 +313,15 @@ public class GridSelector : MonoBehaviour
     {
         if (DontDestroyObject.gameManager.playMode == PlayMode.EDIT)
         {
+            selectedBlockInfo = nonBlockInfo;
+
             InitSelectionUIObjs();
             InitDeletionUIObjs();
             SetDeletableFlag(false);
-            clickedParticle.transform.position = Input.mousePosition;
-            clickedParticle.Play();
+
+            GameObject c = Instantiate(clickedParticle);
+            c.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            c.GetComponent<ParticleSystem>().Play();
             DontDestroyObject.gameManager.ExitEditMode();
         }
     }
@@ -382,9 +398,20 @@ public enum BlockType
 {
     NONE = 0,
     DELETE,
+    JUMP,
+    MOVE_HORIZONTAL,
+    MOVE_VERTICAL,
+    FALL,
+    JUMP_LAUNCHER,
+    NORMAL,
+    ROTATION,
+    FERRIS,
+    CONVEYOR,
+    SPIKE_SMALL,
+    SPIKE_BIG,
     OIL_PRESS,
-    SPINE_SMALL,
-    SPINE_BIG
+    STICKY,
+    BOW
 }
 
 [Serializable]
