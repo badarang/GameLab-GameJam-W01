@@ -1,5 +1,55 @@
 {
     "defaultBlocks": [
+	{
+            "type": 12,
+            "isHalfRotated": true,
+            "rotation": 90,
+            "startGridPos": {
+                "x": 8,
+                "y": 2,
+                "z": 0
+            }
+        }
+        {
+            "type": 12,
+            "isHalfRotated": true,
+            "rotation": 90,
+            "startGridPos": {
+                "x": 8,
+                "y": 6,
+                "z": 0
+            }
+        }
+        {
+            "type": 12,
+            "isHalfRotated": true,
+            "rotation": 90,
+            "startGridPos": {
+                "x": 8,
+                "y": 10,
+                "z": 0
+            }
+        }
+        {
+            "type": 12,
+            "isHalfRotated": true,
+            "rotation": 90,
+            "startGridPos": {
+                "x": 8,
+                "y": 14,
+                "z": 0
+            }
+        }
+        {
+            "type": 12,
+            "isHalfRotated": true,
+            "rotation": 90,
+            "startGridPos": {
+                "x": 8,
+                "y": 2,
+                "z": 0
+            }
+        }
     ],
 "installableBlocks": [
         {
@@ -13,7 +63,7 @@
             }
         },
         {
-            "type": ,
+            "type": 4,
             "isHalfRotated": false,
             "rotation": 0,
             "startGridPos": {

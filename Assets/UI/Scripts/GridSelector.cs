@@ -40,8 +40,8 @@ public class GridSelector : MonoBehaviour
     public readonly Dictionary<BlockType, Vector2Int> blockSizeData = new Dictionary<BlockType, Vector2Int>()
     {
         { BlockType.JUMP, new Vector2Int(1, 1) },
-        { BlockType.MOVE_HORIZONTAL, new Vector2Int(2, 1) },
-        { BlockType.MOVE_VERTICAL, new Vector2Int(2, 1) },
+        { BlockType.MOVE_HORIZONTAL, new Vector2Int(6, 1) },
+        { BlockType.MOVE_VERTICAL, new Vector2Int(2, 5) },
         { BlockType.FALL, new Vector2Int(2, 1) },
         { BlockType.JUMP_LAUNCHER, new Vector2Int(3, 1) },
         { BlockType.NORMAL, new Vector2Int(3, 1) },
@@ -49,7 +49,7 @@ public class GridSelector : MonoBehaviour
         { BlockType.FERRIS, new Vector2Int(6, 6) },
         { BlockType.CONVEYOR, new Vector2Int(4, 1) },
         { BlockType.SPIKE_SMALL, new Vector2Int(1, 1) },
-        { BlockType.SPIKE_BIG, new Vector2Int(1, 1) },
+        { BlockType.SPIKE_BIG, new Vector2Int(3, 1) },
         { BlockType.OIL_PRESS, new Vector2Int(1, 1) },
         { BlockType.STICKY, new Vector2Int(3, 1) },
         { BlockType.BOW, new Vector2Int(1, 1) },
