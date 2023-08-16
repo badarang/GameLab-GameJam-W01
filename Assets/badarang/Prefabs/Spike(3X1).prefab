@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 3558382838480151395}
   - component: {fileID: 8585241612082858787}
   m_Layer: 0
-  m_Name: Spine(3X1)
+  m_Name: Spike(3X1)
   m_TagString: Spike
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -141,7 +141,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: -0.11011504}
@@ -170,6 +170,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 0
+  isHalfRotated: 0
+  rotation: 0
   startGridPos: {x: 0, y: 0, z: 0}
 --- !u!1 &845102258440820281
 GameObject:

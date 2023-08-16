@@ -146,9 +146,9 @@ GameObject:
   - component: {fileID: 8253863477177008666}
   - component: {fileID: 8253863477177008665}
   - component: {fileID: 8253863477177008664}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Square (7)
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -351,9 +351,9 @@ GameObject:
   - component: {fileID: 8253863477496914250}
   - component: {fileID: 8253863477496914249}
   - component: {fileID: 8253863477496914248}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Square (4)
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -448,9 +448,9 @@ GameObject:
   - component: {fileID: 8253863477501525153}
   - component: {fileID: 8253863477501525152}
   - component: {fileID: 8253863477501525159}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Square
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -545,9 +545,9 @@ GameObject:
   - component: {fileID: 8253863477531820335}
   - component: {fileID: 8253863477531820334}
   - component: {fileID: 8253863477531820333}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Square (13)
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -750,9 +750,9 @@ GameObject:
   - component: {fileID: 8253863477854454604}
   - component: {fileID: 8253863477854454595}
   - component: {fileID: 8253863477854454594}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Square (1)
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -847,9 +847,9 @@ GameObject:
   - component: {fileID: 8253863477978536468}
   - component: {fileID: 8253863477978536491}
   - component: {fileID: 8253863477978536490}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Square (10)
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1028,9 +1028,9 @@ GameObject:
   - component: {fileID: 8253863478106716236}
   - component: {fileID: 8253863478106716227}
   - component: {fileID: 8253863478106716226}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Square (17)
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1125,9 +1125,9 @@ GameObject:
   - component: {fileID: 8253863478222449197}
   - component: {fileID: 8253863478222449196}
   - component: {fileID: 8253863478222449187}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Square (3)
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1222,9 +1222,9 @@ GameObject:
   - component: {fileID: 8253863478305719215}
   - component: {fileID: 8253863478305719214}
   - component: {fileID: 8253863478305719213}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Square (19)
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1319,9 +1319,9 @@ GameObject:
   - component: {fileID: 8253863478323969886}
   - component: {fileID: 8253863478323969885}
   - component: {fileID: 8253863478323969884}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Square (5)
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1500,9 +1500,9 @@ GameObject:
   - component: {fileID: 8253863478401473331}
   - component: {fileID: 8253863478401473330}
   - component: {fileID: 8253863478401473329}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Square (14)
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1597,9 +1597,9 @@ GameObject:
   - component: {fileID: 8253863478470150118}
   - component: {fileID: 8253863478470150117}
   - component: {fileID: 8253863478470150116}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Square (15)
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1694,9 +1694,9 @@ GameObject:
   - component: {fileID: 8253863478570694282}
   - component: {fileID: 8253863478570694281}
   - component: {fileID: 8253863478570694280}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Square (16)
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1791,9 +1791,9 @@ GameObject:
   - component: {fileID: 8253863478607375095}
   - component: {fileID: 8253863478607375094}
   - component: {fileID: 8253863478607375093}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Square (8)
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1888,9 +1888,9 @@ GameObject:
   - component: {fileID: 8253863478719421304}
   - component: {fileID: 8253863478719421311}
   - component: {fileID: 8253863478719421310}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Square (11)
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2069,9 +2069,9 @@ GameObject:
   - component: {fileID: 8253863478819307779}
   - component: {fileID: 8253863478819307778}
   - component: {fileID: 8253863478819307777}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Square (9)
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2166,9 +2166,9 @@ GameObject:
   - component: {fileID: 8253863478855029000}
   - component: {fileID: 8253863478855029007}
   - component: {fileID: 8253863478855029006}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Square (12)
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2263,9 +2263,9 @@ GameObject:
   - component: {fileID: 8253863479057264305}
   - component: {fileID: 8253863479057264304}
   - component: {fileID: 8253863479057264311}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Square (2)
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2360,9 +2360,9 @@ GameObject:
   - component: {fileID: 8253863479061959700}
   - component: {fileID: 8253863479061959723}
   - component: {fileID: 8253863479061959722}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Square (6)
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2457,9 +2457,9 @@ GameObject:
   - component: {fileID: 8253863479077670657}
   - component: {fileID: 8253863479077670656}
   - component: {fileID: 8253863479077670663}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Square (18)
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

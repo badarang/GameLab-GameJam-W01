@@ -380,7 +380,7 @@ public class GridSelector : MonoBehaviour
 
 public enum BlockType
 {
-    NONE,
+    NONE = 0,
     DELETE,
     OIL_PRESS,
     SPINE_SMALL,
