@@ -183,7 +183,7 @@
         {
             "type": 15,
             "isHalfRotated": false,
-            "rotation": 180,
+            "rotation": 0,
             "startGridPos": {
                 "x": 13,
                 "y": 13,
@@ -193,10 +193,20 @@
         {
             "type": 15,
             "isHalfRotated": false,
-            "rotation": 180,
+            "rotation": 0,
             "startGridPos": {
                 "x": 15,
                 "y": 13,
+                "z": 0
+            }
+        },
+        {
+            "type": 3,
+            "isHalfRotated": false,
+            "rotation": 0,
+            "startGridPos": {
+                "x": 13,
+                "y": 2,
                 "z": 0
             }
         }
