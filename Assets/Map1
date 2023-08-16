@@ -33,10 +33,10 @@
         {
             "type": 15,
             "isHalfRotated": false,
-            "rotation": 0,
+            "rotation": 180,
             "startGridPos": {
                 "x": 17,
-                "y": 1,
+                "y": 3,
                 "z": 0
             }
         },

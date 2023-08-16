@@ -19,11 +19,12 @@ public class GameManager
     {
         gridSelector = UnityEngine.Object.FindObjectOfType<GridSelector>();
         gridSelector.InitSelectionUI(stageNum);
-        playMode = PlayMode.EDIT;
 
         playCamera = UnityEngine.Object.FindObjectOfType<CameraFollow>();
         editCamera = UnityEngine.Object.FindObjectOfType<UICameraControl>();
         selectionUI = GameObject.Find("SelectionUI");
+
+        EditMode();
     }
 
     public void EditMode()
