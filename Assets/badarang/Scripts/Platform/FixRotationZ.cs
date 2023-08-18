@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,6 +15,17 @@ public class FixRotationZ : MonoBehaviour
     void FixedUpdate()
     {
         transform.rotation = Quaternion.identity;
+        //gameObject.transform.eulerAngles = new Vector3 (0f, 0f, 0f);
         //transform.Rotate(Vector3.zero, Space.World);
+    }
+
+    private void Update()
+    {
+        transform.rotation = Quaternion.identity;
+    }
+
+    private void LateUpdate()
+    {
+        transform.rotation = Quaternion.identity;
     }
 }

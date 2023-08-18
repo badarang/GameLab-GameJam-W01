@@ -94,8 +94,8 @@ GameObject:
   m_Component:
   - component: {fileID: 668464723359366900}
   - component: {fileID: -6791319535857549805}
-  - component: {fileID: 4412735524104720282}
   - component: {fileID: 3384347202020675415}
+  - component: {fileID: 8123570313014564064}
   m_Layer: 0
   m_Name: Spike(1X1)
   m_TagString: Spike
@@ -138,32 +138,7 @@ MonoBehaviour:
   isHalfRotated: 0
   rotation: 0
   startGridPos: {x: 0, y: 0, z: 0}
---- !u!61 &4412735524104720282
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6001130048508072627}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.06275475}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 0.8744905}
-  m_EdgeRadius: 0
+  initialPos: {x: 0, y: 0, z: 0}
 --- !u!50 &3384347202020675415
 Rigidbody2D:
   serializedVersion: 4
@@ -185,6 +160,36 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 7
+--- !u!60 &8123570313014564064
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6001130048508072627}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: -0.020095304, y: 0.52776027}
+      - {x: -0.29795903, y: -0.007484138}
+      - {x: -0.41697508, y: -0.49251598}
+      - {x: 0.42702287, y: -0.49251592}
+      - {x: 0.24269688, y: 0.0075874776}
 --- !u!1 &6116323047262137455
 GameObject:
   m_ObjectHideFlags: 0
