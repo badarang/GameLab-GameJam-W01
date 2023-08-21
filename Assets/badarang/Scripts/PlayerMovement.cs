@@ -50,6 +50,7 @@ public class PlayerMovement : MonoBehaviour
     private float curTime;
     private Color newColor;
     private bool canMove;
+    public GameObject Switch;
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -62,7 +63,8 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        canMove = !DontDestroyObject.Instance.IsEditMode();
+        if (DontDestroyObject.Instance == null) canMove = true;
+        else canMove = !DontDestroyObject.Instance.IsEditMode();
         if (canMove) moveInput = Input.GetAxisRaw("Horizontal");
         else moveInput = 0;
         if (moveInput != 0) gameObject.transform.SetParent(null);
@@ -227,6 +229,11 @@ public class PlayerMovement : MonoBehaviour
         {
             if (!isDied) HandlingDie();
         }
+        
+        if (collision.collider.CompareTag("Switch"))
+        {
+            Instantiate(Switch, new Vector3(16f, 5f, 0), transform.rotation);
+        }
     }
 
     private void OnCollisionStay2D(Collision2D other)
@@ -302,7 +309,7 @@ public class PlayerMovement : MonoBehaviour
          * Handling Editing Mode
          */
 
-        gameManager.EditMode();
+        if (DontDestroyObject.Instance != null) gameManager.EditMode();
         //yield return new
         rb.bodyType = RigidbodyType2D.Dynamic;
     }

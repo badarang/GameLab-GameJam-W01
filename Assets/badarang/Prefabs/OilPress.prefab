@@ -228,7 +228,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.91383886, y: 1}
+  m_Size: {x: 0.7746556, y: 1}
   m_EdgeRadius: 0
 --- !u!1 &2062120758976616676
 GameObject:
@@ -415,3 +415,4 @@ MonoBehaviour:
   rotation: 0
   startGridPos: {x: 0, y: 0, z: 0}
   initialPos: {x: 0, y: 0, z: 0}
+  isDefault: 0

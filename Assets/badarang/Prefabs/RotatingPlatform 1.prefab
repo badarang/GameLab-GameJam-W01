@@ -518,7 +518,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6323c3c79db186c4ba70c6ae9a805aeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  degreePerSecond: 50
+  degreePerSecond: -50
 --- !u!50 &1789697134166758676
 Rigidbody2D:
   serializedVersion: 4
@@ -557,6 +557,7 @@ MonoBehaviour:
   rotation: 0
   startGridPos: {x: 0, y: 0, z: 0}
   initialPos: {x: 0, y: 0, z: 0}
+  isDefault: 0
 --- !u!1 &1789697135068452305
 GameObject:
   m_ObjectHideFlags: 0

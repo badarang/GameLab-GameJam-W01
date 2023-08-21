@@ -86,7 +86,16 @@ public class EditableBlock : BlockBase, IInstallable, IDeletable
     {
         if (!EventSystem.current.IsPointerOverGameObject() && deletable)
         {
-            onDeleteCallback(this.gameObject);
+            if (DontDestroyObject.Instance.remainAction > 0 && isDefault == true)
+            {
+                DontDestroyObject.Instance.remainAction--;
+                onDeleteCallback(this.gameObject);
+            }
+            else if (isDefault == false)
+            {
+                DontDestroyObject.Instance.remainAction++;
+                onDeleteCallback(this.gameObject);
+            }
         }
     }
 

@@ -27,7 +27,6 @@ public class Tutorial : MonoBehaviour
         if (this.gameObject.name == "Tutorial1")
         {
             placeBox.transform.GetChild(1).gameObject.SetActive(false);
-            Debug.Log(placeBox.name);
         }
         else
         {

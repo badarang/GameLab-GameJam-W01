@@ -25,7 +25,7 @@ private float flagDelay = 1.3f;
         yield return new WaitForSeconds(.9f);
         transform.position = targetFlag.position;
         yield return new WaitForSeconds(1.1f);
-        if (DontDestroyObject.gameManager.curStage != 1)
+        if (DontDestroyObject.Instance.getCurStage() != 1)
             DontDestroyObject.gameManager.EditMode();
     }
     

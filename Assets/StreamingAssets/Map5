@@ -1,0 +1,176 @@
+{
+    "defaultBlocks": [
+        {
+            "type": 11,
+            "isHalfRotated": false,
+            "rotation": 0,
+            "startGridPos": {
+                "x": 35,
+                "y": 0,
+                "z": 0
+            }
+        },
+        {
+            "type": 12,
+            "isHalfRotated": false,
+            "rotation": 0,
+            "startGridPos": {
+                "x": 36,
+                "y": 0,
+                "z": 0
+            }
+        },
+        {
+            "type": 12,
+            "isHalfRotated": true,
+            "rotation": -90,
+            "startGridPos": {
+                "x": 39,
+                "y": 5,
+                "z": 0
+            }
+        },
+        {
+            "type": 12,
+            "isHalfRotated": true,
+            "rotation": 90,
+            "startGridPos": {
+                "x": 43,
+                "y": 3,
+                "z": 0
+            }
+        },
+        {
+            "type": 12,
+            "isHalfRotated": true,
+            "rotation": 90,
+            "startGridPos": {
+                "x": 43,
+                "y": 7,
+                "z": 0
+            }
+        },
+        {
+            "type": 14,
+            "isHalfRotated": false,
+            "rotation": false,
+            "startGridPos": {
+                "x": 45,
+                "y": 10,
+                "z": 0
+            }
+        },
+        {
+            "type": 14,
+            "isHalfRotated": false,
+            "rotation": false,
+            "startGridPos": {
+                "x": 49,
+                "y": 10,
+                "z": 0
+            }
+        },
+        {
+            "type": 14,
+            "isHalfRotated": false,
+            "rotation": false,
+            "startGridPos": {
+                "x": 59,
+                "y": 10,
+                "z": 0
+            }
+        },
+        {
+            "type": 13,
+            "isHalfRotated": false,
+            "rotation": 180,
+            "startGridPos": {
+                "x": 45,
+                "y": 12,
+                "z": 0
+            }
+        },
+        {
+            "type": 13,
+            "isHalfRotated": false,
+            "rotation": 180,
+            "startGridPos": {
+                "x": 48,
+                "y": 12,
+                "z": 0
+            }
+        },
+        {
+            "type": 13,
+            "isHalfRotated": false,
+            "rotation": 180,
+            "startGridPos": {
+                "x": 51,
+                "y": 12,
+                "z": 0
+            }
+        },
+        {
+            "type": 13,
+            "isHalfRotated": false,
+            "rotation": 180,
+            "startGridPos": {
+                "x": 58,
+                "y": 12,
+                "z": 0
+            }
+        },
+        {
+            "type": 13,
+            "isHalfRotated": false,
+            "rotation": 180,
+            "startGridPos": {
+                "x": 62,
+                "y": 12,
+                "z": 0
+            }
+        },
+        {
+            "type": 15,
+            "isHalfRotated": false,
+            "rotation": 0,
+            "startGridPos": {
+                "x": 59,
+                "y": 13,
+                "z": 0
+            }
+        },
+        {
+            "type": 15,
+            "isHalfRotated": false,
+            "rotation": 0,
+            "startGridPos": {
+                "x": 61,
+                "y": 13,
+                "z": 0
+            }
+        }
+    ],
+    "installableBlocks": [
+        {
+            "type": 2,
+            "isHalfRotated": false,
+            "rotation": 0,
+            "startGridPos": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+            }
+        },
+        {
+            "type": 7,
+            "isHalfRotated": false,
+            "rotation": 0,
+            "startGridPos": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+            }
+        }
+    ]
+    }

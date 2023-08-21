@@ -1,0 +1,156 @@
+{
+    "defaultBlocks": [
+    {
+        "type": 6,
+        "isHalfRotated": false,
+        "rotation": 0,
+        "startGridPos": {
+            "x": -7,
+            "y": 13,
+            "z": 0
+        }
+    },
+    {
+        "type": 6,
+        "isHalfRotated": false,
+        "rotation": 0,
+        "startGridPos": {
+            "x": -15,
+            "y": 21,
+            "z": 0
+        }
+    },
+    {
+        "type": 11,
+        "isHalfRotated": false,
+        "rotation": 0,
+        "startGridPos": {
+            "x": 7,
+            "y": 4,
+            "z": 0
+        }
+    },
+    {
+        "type": 11,
+        "isHalfRotated": false,
+        "rotation": 0,
+        "startGridPos": {
+            "x": 9,
+            "y": 7,
+            "z": 0
+        }
+    },
+    {
+        "type": 11,
+        "isHalfRotated": false,
+        "rotation": 0,
+        "startGridPos": {
+            "x": 15,
+            "y": 10,
+            "z": 0
+        }
+    },
+    {
+        "type": 15,
+        "isHalfRotated": false,
+        "rotation": 0,
+        "startGridPos": {
+            "x": 8,
+            "y": 16,
+            "z": 0
+        }
+    },
+    {
+        "type": 15,
+        "isHalfRotated": false,
+        "rotation": 0,
+        "startGridPos": {
+            "x": 5,
+            "y": 16,
+            "z": 0
+        }
+    },
+    {
+        "type": 15,
+        "isHalfRotated": false,
+        "rotation": 0,
+        "startGridPos": {
+            "x": 2,
+            "y": 16,
+            "z": 0
+        }
+    },
+    {
+        "type": 12,
+        "isHalfRotated": false,
+        "rotation": 0,
+        "startGridPos": {
+            "x": -5,
+            "y": 14,
+            "z": 0
+        }
+    },
+    {
+        "type": 11,
+        "isHalfRotated": true,
+        "rotation": -90,
+        "startGridPos": {
+            "x": -6,
+            "y": 16,
+            "z": 0
+        }
+    },
+    {
+        "type": 15,
+        "isHalfRotated": false,
+        "rotation": 0,
+        "startGridPos": {
+            "x": -7,
+            "y": 25,
+            "z": 0
+        }
+    },
+    {
+        "type": 11,
+        "isHalfRotated": true,
+        "rotation": -90,
+        "startGridPos": {
+            "x": -21,
+            "y": 17,
+            "z": 0
+        }
+    },
+    {
+        "type": 11,
+        "isHalfRotated": true,
+        "rotation": -90,
+        "startGridPos": {
+            "x": -21,
+            "y": 18,
+            "z": 0
+        }
+    }
+    ],
+    "installableBlocks": [
+        {
+            "type": 2,
+            "isHalfRotated": false,
+            "rotation": 0,
+            "startGridPos": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+            }
+        },
+        {
+            "type": 3,
+            "isHalfRotated": false,
+            "rotation": 0,
+            "startGridPos": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+            }
+        }
+    ]
+    }

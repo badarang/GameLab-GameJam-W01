@@ -37,7 +37,6 @@ public class ArrowTrap : MonoBehaviour
             }
             else if (this.transform.eulerAngles.z == 90 || this.transform.eulerAngles.z == 270)
             {
-                Debug.Log("2");
                 Instantiate(projectile, spawnLocation.position, Quaternion.Inverse(transform.rotation));
             }
             else if(this.transform.eulerAngles.z == 0)

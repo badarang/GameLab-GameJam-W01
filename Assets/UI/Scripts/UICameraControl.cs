@@ -49,7 +49,7 @@ public class UICameraControl : MonoBehaviour
         {
             curMousePos = Input.mousePosition;
             prevMousePos = Input.mousePosition;
-            Debug.Log(curMousePos + " " + prevMousePos);
+            //Debug.Log(curMousePos + " " + prevMousePos);
         }
 
         if (Input.GetMouseButton(1))

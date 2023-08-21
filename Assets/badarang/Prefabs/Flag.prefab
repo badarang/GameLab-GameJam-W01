@@ -123,6 +123,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 3703162532519346756}
+  starCanvas: {fileID: 5104290708793325297, guid: 497a8ee0c11cac8409fcbe66712b5ef7, type: 3}
   fireWorkParticle: {fileID: 180128, guid: 6586ff0f14125534cae2f5d8f04b7871, type: 3}
 --- !u!1 &3703162533833180775
 GameObject:

@@ -20,17 +20,19 @@ public class GameManager
     private int deathCount;
     public int curStage;
 
+    public int getCurStage()
+    {
+        return curStage;
+    }
+    
     public void StartStage(int stageNum)
     {
         gridSelector = UnityEngine.Object.FindObjectOfType<GridSelector>();
         gridSelector.InitSelectionUI(stageNum);
-        curStage = stageNum;
         playCamera = UnityEngine.Object.FindObjectOfType<CameraFollow>();
         editCamera = UnityEngine.Object.FindObjectOfType<UICameraControl>();
         selectionUI = GameObject.Find("SelectionUI");
-
         deathCount = -1;
-        
         EditMode();
         ExitEditMode();
     }
@@ -55,7 +57,6 @@ public class GameManager
     public void ExitEditMode()
     {
         playMode = PlayMode.PLAY;
-
         playCamera.enabled = true;
         editCamera.Init();
         editCamera.enabled = false;
@@ -75,7 +76,7 @@ public class GameManager
         playMode = PlayMode.LOBBY;
         SceneManager.LoadScene("Lobby");
     }
-
+    
     public IEnumerator LoadScene(int stageNum)
     {
         loadState = SceneLoadState.LOAD;
@@ -86,6 +87,7 @@ public class GameManager
         }
         yield return new WaitForEndOfFrame();
         loadState = SceneLoadState.ENDLOAD;
+        curStage = stageNum;
         StartStage(stageNum);
     }
 

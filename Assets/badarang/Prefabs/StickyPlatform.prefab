@@ -49,6 +49,8 @@ MonoBehaviour:
   isHalfRotated: 0
   rotation: 0
   startGridPos: {x: 0, y: 0, z: 0}
+  initialPos: {x: 0, y: 0, z: 0}
+  isDefault: 0
 --- !u!1 &8376953928936629128
 GameObject:
   m_ObjectHideFlags: 0
@@ -123,7 +125,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: -5177388603050735206, guid: 8884154dfe85442a3a3578be807dbcdf, type: 3}
   m_Color: {r: 0.2193947, g: 0.46226418, b: 0, a: 1}
   m_FlipX: 0

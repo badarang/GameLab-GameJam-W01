@@ -45,7 +45,8 @@ public class GridSelector : MonoBehaviour
     private Vector2Int maxTileBound = new Vector2Int(120, 60);
 
     public GameObject clickedParticle;
-
+    private int curStage;
+    
     [SerializeField]
     public readonly Dictionary<BlockType, Vector2Int> blockSizeData = new Dictionary<BlockType, Vector2Int>()
     {
@@ -53,7 +54,7 @@ public class GridSelector : MonoBehaviour
         { BlockType.MOVE_HORIZONTAL, new Vector2Int(6, 1) },
         { BlockType.MOVE_VERTICAL, new Vector2Int(2, 5) },
         { BlockType.FALL, new Vector2Int(2, 1) },
-        { BlockType.JUMP_LAUNCHER, new Vector2Int(3, 1) },
+        { BlockType.ROTATING_OBSTACLE, new Vector2Int(7, 1) },
         { BlockType.NORMAL, new Vector2Int(3, 1) },
         { BlockType.ROTATION, new Vector2Int(1, 1) },
         { BlockType.FERRIS, new Vector2Int(7, 6) },
@@ -63,6 +64,7 @@ public class GridSelector : MonoBehaviour
         { BlockType.OIL_PRESS, new Vector2Int(1, 1) },
         { BlockType.STICKY, new Vector2Int(3, 1) },
         { BlockType.BOW, new Vector2Int(1, 1) },
+        { BlockType.ROTATING_OBSTACLE2, new Vector2Int(2, 6) },
         { BlockType.NONE, new Vector2Int(0, 0) },
         { BlockType.DELETE, new Vector2Int(0, 0) },
     };
@@ -77,16 +79,28 @@ public class GridSelector : MonoBehaviour
     private bool hasInitialized = false;
     private BlockInfo deleteButtonInfo;
     private BlockInfo nonBlockInfo;
-
     // Start is called before the first frame update
     void Start()
     {
         hasInitialized = false;
     }
-
+    
+    
     // Update is called once per frame
     void Update()
     {
+        if (DontDestroyObject.Instance.remainAction >= DontDestroyObject.Instance.starCriteria_3) DontDestroyObject.Instance.star = 3;
+        else if (DontDestroyObject.Instance.remainAction >= DontDestroyObject.Instance.starCriteria_2) DontDestroyObject.Instance.star = 2;
+        else DontDestroyObject.Instance.star = 1;
+        if (GameObject.Find("SelectionManager") != null)
+        {
+            GameObject.Find("Star").GetComponent<DrawStarInEditMode>().star = DontDestroyObject.Instance.star;
+        }
+        
+        if (Input.GetKeyUp(KeyCode.Space) || Input.GetKeyUp(KeyCode.UpArrow))
+        {
+            FinishEditMode();
+        }
         if (hasInitialized && DontDestroyObject.Instance.IsEditMode()) {
             if (selectedBlockInfo.type != BlockType.NONE && selectedBlockInfo.type != BlockType.DELETE)
             {
@@ -102,6 +116,8 @@ public class GridSelector : MonoBehaviour
 
                 hoverPos = selectionTilemap.WorldToCell(Camera.main.ScreenToWorldPoint(Input.mousePosition));
                 bool isValidToPlace = IsValidPositionToPlace(new Vector2Int(hoverPos.x, hoverPos.y));
+                //액션 횟수가 0 이하이면 설치 못하게 변경
+                if (DontDestroyObject.Instance.remainAction <= 0) isValidToPlace = false;
 
                 if (hoverPos != prevHoverPos)
                 {
@@ -142,7 +158,8 @@ public class GridSelector : MonoBehaviour
 
                     prevHoverPos = hoverPos;
                 }
-
+                
+                //사용자가 직접 설치
                 if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject() && isValidToPlace)
                 {
                     Vector3 targetPos = selectionTilemap.GetCellCenterWorld(hoverPos);
@@ -151,8 +168,10 @@ public class GridSelector : MonoBehaviour
                         new Vector2Int(blockSizeData[selectedBlockInfo.type].y, blockSizeData[selectedBlockInfo.type].x) : 
                         blockSizeData[selectedBlockInfo.type];
                     selectedBlockInfo.startGridPos = selectionTilemap.WorldToCell(GetStartGridPos(targetPos, blockSize));
-                    PlaceBlockObj(selectedBlockInfo);
-                    //FinishEditMode();
+                    PlaceBlockObj(selectedBlockInfo, false);
+                    DontDestroyObject.Instance.remainAction--;
+                    if (DontDestroyObject.Instance.getCurStage() == 1)
+                        FinishEditMode();
                 }
             }
             else
@@ -162,8 +181,49 @@ public class GridSelector : MonoBehaviour
         }
     }
     
+    //json 파일 읽어서 불러오는 과정
     public void InitSelectionUI(int level)
     {
+        curStage = level;
+        switch (curStage)
+        {
+            case 1:
+                DontDestroyObject.Instance.remainAction = 2;
+                break;
+            case 2:
+                DontDestroyObject.Instance.remainAction = 3;
+                break;
+            case 3:
+                DontDestroyObject.Instance.remainAction = 5;
+                break;
+            case 4:
+                DontDestroyObject.Instance.remainAction = 4;
+                break;
+            case 5:
+                DontDestroyObject.Instance.remainAction = 6;
+                break;
+            case 6:
+                DontDestroyObject.Instance.remainAction = 5;
+                break;
+            case 7:
+                DontDestroyObject.Instance.remainAction = 4;
+                break;
+            case 8:
+                DontDestroyObject.Instance.remainAction = 3;
+                break;
+            case 9:
+                DontDestroyObject.Instance.remainAction = 6;
+                break;
+            case 10:
+                DontDestroyObject.Instance.remainAction = 8;
+                break;
+            default:
+                DontDestroyObject.Instance.remainAction = 2;
+                break;
+        }
+        DontDestroyObject.Instance.starCriteria_2 = DontDestroyObject.Instance.starCriterias[curStage - 1, 0];
+        DontDestroyObject.Instance.starCriteria_3 = DontDestroyObject.Instance.starCriterias[curStage - 1, 1];
+        
         blockObjectData = new Dictionary<BlockType, GameObject>();
         blockBtnImgData = new Dictionary<BlockType, GameObject>();
         blockBtnNameData = new Dictionary<BlockType, string>();
@@ -201,7 +261,7 @@ public class GridSelector : MonoBehaviour
         SearchPreventedBlocks();
         foreach (BlockInfo b in curMapData.defaultBlocks)
         {
-            PlaceBlockObj(b);
+            PlaceBlockObj(b, true);
         }
 
         nonBlockInfo = new BlockInfo { type = BlockType.NONE };
@@ -247,11 +307,10 @@ public class GridSelector : MonoBehaviour
         }
     }
 
-    private void PlaceBlockObj(BlockInfo blockInfo)
+    private void PlaceBlockObj(BlockInfo blockInfo, bool isDefault)
     {
         GameObject g = Instantiate(blockObjectData[blockInfo.type]);
-        g.GetComponent<BlockBase>().SetBlockRotation(blockInfo.isHalfRotated, blockInfo.rotation);
-        g.GetComponent<BlockBase>().SetStartGridPos(blockInfo.startGridPos);
+        
         g.GetComponent<Transform>().rotation = Quaternion.Euler(new Vector3(0, 0, blockInfo.rotation));
 
         Vector2Int blockSize = 
@@ -277,13 +336,16 @@ public class GridSelector : MonoBehaviour
         }
 
         g.GetComponent<Transform>().position = position;
-        g.GetComponent<BlockBase>().SetInitialPos(position);
-
+        g.GetComponent<BlockBase>().Init(blockInfo.startGridPos, blockInfo.isHalfRotated, blockInfo.rotation, position, isDefault);
+        
         IDeletable deletable = g.GetComponent<IDeletable>();
+        
         if (deletable != null)
         {
+            bool _isDefault = g.GetComponent<BlockBase>().isDefault;
             deletable.InitDeletable(blockSizeData[blockInfo.type]);
-            deletable.SetOnDeleteCallback((target) => {
+            deletable.SetOnDeleteCallback((target) =>
+            {
                 instantiatedBlockObjs.Remove(target);
                 Destroy(target);
 
@@ -301,10 +363,11 @@ public class GridSelector : MonoBehaviour
                 {
                     preventedBlocksSet.Remove(t);
                 }
-
                 //FinishEditMode();
             });
+            
 
+            //삭제 가능한 블록  hover 시 검은색 오브젝트 띄우기 
             deletable.SetOnHoverCallback((target) => {
                 if (instantiatedBlockObjs.Contains(target))
                 {
@@ -489,7 +552,7 @@ public enum BlockType
     MOVE_HORIZONTAL,
     MOVE_VERTICAL,
     FALL,
-    JUMP_LAUNCHER,
+    ROTATING_OBSTACLE,
     NORMAL,
     ROTATION,
     FERRIS,
@@ -498,7 +561,8 @@ public enum BlockType
     SPIKE_BIG,
     OIL_PRESS,
     STICKY,
-    BOW
+    BOW,
+    ROTATING_OBSTACLE2
 }
 
 [Serializable]

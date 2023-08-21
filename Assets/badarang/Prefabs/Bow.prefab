@@ -758,7 +758,7 @@ GameObject:
   - component: {fileID: 2126817666}
   m_Layer: 0
   m_Name: Bow
-  m_TagString: Untagged
+  m_TagString: ArrowNotDie
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -831,10 +831,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6e71515ae4a94f46a5d26899678a6b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 0
+  type: 15
   isHalfRotated: 0
   rotation: 0
   startGridPos: {x: 0, y: 0, z: 0}
+  initialPos: {x: 0, y: 0, z: 0}
+  isDefault: 0
 --- !u!50 &2126817666
 Rigidbody2D:
   serializedVersion: 4

@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 6757120186120770108}
   - component: {fileID: 1142059335003770662}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: Square (1)
-  m_TagString: Untagged
+  m_TagString: ArrowNotDie
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 8297011466508055770}
   m_Layer: 0
   m_Name: Joint2
-  m_TagString: Untagged
+  m_TagString: ArrowNotDie
   m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -126,7 +126,7 @@ GameObject:
   - component: {fileID: 8297011467265484285}
   m_Layer: 0
   m_Name: Joint1
-  m_TagString: Untagged
+  m_TagString: ArrowNotDie
   m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -158,7 +158,7 @@ GameObject:
   - component: {fileID: -4497052515524696822}
   m_Layer: 0
   m_Name: MovingPlatform(Horizontal)
-  m_TagString: Untagged
+  m_TagString: ArrowNotDie
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -199,6 +199,7 @@ MonoBehaviour:
   rotation: 0
   startGridPos: {x: 0, y: 0, z: 0}
   initialPos: {x: 0, y: 0, z: 0}
+  isDefault: 0
 --- !u!1 &8297011467435120228
 GameObject:
   m_ObjectHideFlags: 0

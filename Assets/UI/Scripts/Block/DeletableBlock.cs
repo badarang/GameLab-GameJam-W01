@@ -31,7 +31,7 @@ public class DeletableBlock : BlockBase, IDeletable
     {
 
     }
-
+    
     public void InitDeletable(Vector2Int blockSize)
     {
         colliders = GetComponentsInChildren<BoxCollider2D>();
@@ -86,7 +86,18 @@ public class DeletableBlock : BlockBase, IDeletable
     {
         if (!EventSystem.current.IsPointerOverGameObject() && deletable)
         {
-            onDeleteCallback(this.gameObject);
+            if (DontDestroyObject.Instance.remainAction > 0 && isDefault == true)
+            {
+                DontDestroyObject.Instance.remainAction--;
+                onDeleteCallback(this.gameObject);
+                if (DontDestroyObject.Instance.getCurStage() == 1)
+                    GameObject.Find("SelectionManager").GetComponent<GridSelector>().FinishEditMode();
+            }
+            else if (isDefault == false)
+            {
+                DontDestroyObject.Instance.remainAction++;
+                onDeleteCallback(this.gameObject);
+            }
         }
     }
 
